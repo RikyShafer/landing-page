@@ -1,23 +1,15 @@
-// ייבא מודולים נדרשים ואת מודל המשתמש
 const { json, text } = require("express");
 const User = require("../models/User");
 const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken")
-// פונקציית אסינכרון ליצירת משתמש חדש
 const addUser  = async (req, res) => {
-    // פירוק נתוני משתמש מגוף הבקשה
     const {
         name,
         password,
         email,
         phone,
-       
-
     } = req.body;
 
- 
-
-    
     if (!name || !email || !phone) {
         return res.status(400).json({
             error: true,
@@ -25,9 +17,6 @@ const addUser  = async (req, res) => {
             data: null
         })
     }
-
-
-    // אימות: בדיקה אם המייל  כבר קיים במערכת
     const existingUseremail = await User .findOne({ email: email });
     if (existingUseremail) {
         return res.status(400).json({
@@ -41,7 +30,6 @@ const addUser  = async (req, res) => {
 
 
     try {
-        //  צור משתמש חדש באמצעות מודל המשתמש והנתונים שסופקו
         const User  = await User .create({
             name,
             password: hashedPwd,
@@ -53,8 +41,6 @@ const addUser  = async (req, res) => {
 
         console.log(User );
 
-
-        // החזר תגובת הצלחה עם פרטי המשתמש שנוצרו
         return res.status(201).json({
             error: false,
             message: "User created successfully",
@@ -68,10 +54,8 @@ const addUser  = async (req, res) => {
     
     }
 
-    
     catch (error) {
-        // החזר תגובת שגיאה אם יצירת המשתמש נכשלת
-        return res.status(400).json({
+                return res.status(400).json({
             error: true,
             message: ' error',
             data: null
@@ -79,13 +63,10 @@ const addUser  = async (req, res) => {
     }
 };
 
-// פונקציית אסינכרון כדי לאחזר את כל המשתמשים
 const getAllUser  = async (req, res) => {
     try {
-        // מצא את כל המשתמשים במסד הנתונים רק את האלה שהם משתמשים - לקוחות והמר לאובייקטי JavaScript רגילים
         const userList = await User .find({ roles: { $ne: 'ADMIN' }, deleted: false, }, { password: 0, roles: 0 }).lean();
 
-        // בדוק אם קיימים משתמשים; אם לא, החזר מערך ריק
         if (!userList || userList.length === 0) {
             return res.status(201).json({
                 error: false,
@@ -93,15 +74,13 @@ const getAllUser  = async (req, res) => {
                 data: []
             })
         }
-        // החזר תגובת הצלחה עם רשימת המשתמשים
-        // res.status(200).json(userList);
+
         res.status(201).json({
             error: false,
             message: "",
             data: userList
         })
     } catch (error) {
-        // החזר תגובת שגיאה אם אחזור משתמשים נכשל
         console.error("Error adding user:", error);
         res.status(500).json({
             error: true,
@@ -111,12 +90,10 @@ const getAllUser  = async (req, res) => {
     }
 }
 
-// פונקציית אסינכרון לעדכון משתמש
 const updateUser  = async (req, res) => {
     
 console.log(req.file,);
 
-    // גוף הבקשה לפירוק
     const { _id,
         name,
         password,
@@ -134,7 +111,6 @@ console.log(req.file,);
             data: null
         })
     }
-    // בדוק אם מסופק מזהה משתמש
     const User  = await User .findById(_id);
     if (!User ) {
         return res
@@ -145,8 +121,6 @@ console.log(req.file,);
             });
     }
 
-
-    // אימות: בדיקה אם המייל כבר קיים במערכת
     const existingUseremail = await User .findOne({ email: email });
     if (existingUseremail && existingUseremail._id.toString() !== _id) {
         return res.status(400).json({
@@ -162,18 +136,13 @@ console.log(req.file,);
 
 
 
-// Set firstName if it's provided, otherwise keep the existing value
 User .name = name ? name : User .name;
 
-//
 
-// Set email if it's provided, otherwise keep the existing value
 User .email = email ? email : User .email;
 
-// Set phone if it's provided, otherwise keep the existing value
 User .phone = phone ? phone : User .phone;
 
-// Save the updated User 
 const updateUser = await User .save();
 
     res.json({
@@ -216,7 +185,6 @@ const deleteUser  = async (req, res) => {
 
 };
 
-// ייצא את הפונקציות המוגדרות לשימוש בקבצים אחרים
 module.exports = { 
     getAllUser , 
     addUser , 

@@ -5,7 +5,6 @@ const conversationController = require('../controllers/conversationController.js
 
 const verifyJWT = require("../middleware/verifyJWT");
 const verifyAdmin = require("../middleware/verifyAdmin");
-// Use the userController version
 
 
 
@@ -18,5 +17,4 @@ router.delete("/", verifyJWT, conversationController.deleteMessage);
 
 
 
-// Export the router
 module.exports = router;

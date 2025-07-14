@@ -1,30 +1,29 @@
 
-require("dotenv").config() // משמש להגדרת קונפיגורציה עבור משתני סביבה מתוך קובץ .env
-const express = require("express") // יבוא של ספריית ה-Express, ספריית פריימוורק ליצירת אפליקציות ווב ב-Node.js
-const cors = require("cors") // יבוא של ספריית ה-CORS, המאפשרת שימוש בפוליסות CORS באפליקציה
+require("dotenv").config() 
+const express = require("express") 
+const cors = require("cors")
 const cookieParser=require("cookie-parser")
-const corsOptions = require("./config/corsOptions") // יבוא של קובץ ההגדרות של פוליסות ה-CORS
-const connectDB = require("./config/dbConn") // יבוא של פונקציה להתחברות למסד נתונים
-const mongoose=require("mongoose") // יבוא של ספריית Mongoose, המאפשרת פעולות עם מסד נתונים MongoDB
+const corsOptions = require("./config/corsOptions") 
+const connectDB = require("./config/dbConn")
+const mongoose=require("mongoose") 
 const path = require('path');
-const cors_proxy = require('cors-anywhere'); // יבוא של ספריית ה-CORS-Anywhere, המאפשרת יצירת שרת Proxy עם פוליסת CORS
+const cors_proxy = require('cors-anywhere'); 
 
-const PORT = process.env.PORT || 7000 // הגדרת משתנה PORT לפי ערך מסוים או לפי ערך 7001 כברירת מחדל
+const PORT = process.env.PORT || 7000 
 
-cors_proxy // יצירת שרת Proxy באמצעות ה-CORS-Anywhere
+cors_proxy 
   .createServer({
-    originWhitelist: [], // רשימת המקורות המורשים לגישה דרך ה-Proxy
+    originWhitelist: [], 
   })
 
-const app = express() // יצירת אפליקציה חדשה באמצעות ה-Express
-connectDB() // התחברות למסד נתונים
+const app = express() 
+connectDB() 
 
-//middlewares - יישום מידלוורים
-app.use(cors(corsOptions)) // שימוש בפוליסות ה-CORS שהוגדרו
+//middlewares 
+app.use(cors(corsOptions))
 app.use(cookieParser())
-app.use(express.json()) // השימוש ב-JSON כפורמט להעברת נתונים בבקשות
-app.use(express.static("public")) // שימוש בתיקיית הקבצים הסטטית בשם "public" לקבצי סטטיקה
-// Serve static files from the React app
+app.use(express.json())  
+app.use(express.static("public")) 
 app.use(express.static(path.join(__dirname, 'app')));
 
 //routes 
@@ -41,8 +40,6 @@ res.send(`בדיקה האם השרת לדף נחיתה  עובד
 })
 
 
-// The "catchall" handler: for any request that doesn't
-// match one above, send back index.html so React Router can handle the routing.
 app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname+'app/index.html'));
 });

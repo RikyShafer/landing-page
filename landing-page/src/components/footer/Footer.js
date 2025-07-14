@@ -33,12 +33,11 @@ const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=riky.shafer@gmai
   return (
     <footer className='footer'>
       <h1 className='footer-address'>
-        <BiMap style={{ marginRight: '8px' }} />
         מיתוג | עיצוב | בניית אתרים
       </h1>
 
       <h1 className='studio'>
-        סטודיו R&R - אתרים בעיצוב אישי
+        סטודיו S&R - אתרים בעיצוב אישי
       </h1>
 
       <h1 className='footer-contactus'>

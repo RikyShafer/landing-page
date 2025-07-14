@@ -28,6 +28,6 @@ router.post("/" , upload.single('image') , UserController.addUser );
 router.put("/" , [verifyJWT, upload.single('image')], UserController.updateUser );
 router.delete("/",verifyJWT,verifyAdmin, UserController.deleteUser );
 
-// Export the router
+
 module.exports = router;
 
