@@ -17,17 +17,16 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 const router = express.Router();
-const userRegisterController = require('../controllers/userRegisterController.js');
+const UserController = require('../controllers/userController.js');
 const verifyJWT = require("../middleware/verifyJWT.js");
 const verifyAdmin = require("../middleware/verifyAdmin.js");
 
 // router.use(verifyJWT);
 // router.use(verifyAdmin);
-router.get("/", verifyJWT,verifyAdmin,userRegisterController.getAllUserRegister);
-router.get("/:id", verifyJWT,verifyAdmin,userRegisterController.getUserRegisterById);
-router.post("/" , upload.single('image') , userRegisterController.addUserRegister);
-router.put("/" , [verifyJWT, upload.single('image')], userRegisterController.updateUserRegister);
-router.delete("/",verifyJWT,verifyAdmin, userRegisterController.deleteUserRegister);
+router.get("/", verifyJWT,verifyAdmin,UserController.getAllUser );
+router.post("/" , upload.single('image') , UserController.addUser );
+router.put("/" , [verifyJWT, upload.single('image')], UserController.updateUser );
+router.delete("/",verifyJWT,verifyAdmin, UserController.deleteUser );
 
 // Export the router
 module.exports = router;

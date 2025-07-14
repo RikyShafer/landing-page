@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const Conversation = require('../models/Conversation'); // התאמת הנתיב לפי הצורך
-const UserRegister = require("../models/UserRegister");
+const User  = require("../models/User");
 
 // פונקציית GET לשליפת שיחות לפי מזהי משתתפים
 const viewInChatToADMIN = async (req, res) => {
@@ -57,7 +57,7 @@ const continueChatting = async (req, res) => {
         }
 
         // חיפוש משתמש מקבל ההודעה
-        const Finding = await UserRegister.findById(recipient);
+        const Finding = await User .findById(recipient);
         if (!Finding) {
             return res.status(404).json({ message: 'Receiving user not found' });
         }

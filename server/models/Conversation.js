@@ -5,18 +5,18 @@ const conversationSchema = new mongoose.Schema({
     user1: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
-        ref: 'UserRegister'
+        ref: 'User'
     },
     user2: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
-        ref: 'UserRegister'
+        ref: 'User'
     },
     messages: [{
         sender: {
             type: mongoose.Schema.Types.ObjectId,
             required: true,
-            ref: 'UserRegister'
+            ref: 'User'
         },
         text: {
             type: mongoose.Schema.Types.String,

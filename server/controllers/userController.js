@@ -1,40 +1,34 @@
 // ייבא מודולים נדרשים ואת מודל המשתמש
 const { json, text } = require("express");
-const UserRegister = require("../models/UserRegister");
+const User = require("../models/User");
 const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken")
 // פונקציית אסינכרון ליצירת משתמש חדש
-const addUserRegister = async (req, res) => {
+const addUser  = async (req, res) => {
     // פירוק נתוני משתמש מגוף הבקשה
     const {
-        firstName,
-        lastName,
+        name,
         password,
         email,
         phone,
-        anotherQuestion
+       
 
     } = req.body;
 
-    const image = (req.file?.filename ? req.file.filename : "")
+ 
 
-    console.log(firstName,
-        lastName,
-        password,
-        email,
-        phone,
-        anotherQuestion);
-    if (!firstName || !password || !lastName || !email || !phone) {
+    
+    if (!name || !email || !phone) {
         return res.status(400).json({
             error: true,
-            message: 'firstName || password || lastName || email || phone  are required',
+            message: 'Name || email || phone  are required',
             data: null
         })
     }
 
 
     // אימות: בדיקה אם המייל  כבר קיים במערכת
-    const existingUseremail = await UserRegister.findOne({ email: email });
+    const existingUseremail = await User .findOne({ email: email });
     if (existingUseremail) {
         return res.status(400).json({
             error: true,
@@ -43,73 +37,32 @@ const addUserRegister = async (req, res) => {
         })
     }
 
-    //איך צורך הזה יש רק אפשרותת למייל שהוא יחודי 
-    // // Retrieve all users from the database
-    // const allUsers = await UserRegister.find();
-
-    // // אימות: בדיקה אם סיסמה  כבר קיים במערכת
-    // for (const user of allUsers) {
-    //     const match = await bcrypt.compare(password, user.password);
-    //     if (match) {
-    //         return res.status(400).json({
-    //             error: true,
-    //             message: 'Password must be unique',
-    //             data: null
-    //         });
-    //     }
-    // }
-
     const hashedPwd = await bcrypt.hash(password, 10);
 
 
     try {
         //  צור משתמש חדש באמצעות מודל המשתמש והנתונים שסופקו
-        const userRegister = await UserRegister.create({
-            firstName,
-            lastName,
+        const User  = await User .create({
+            name,
             password: hashedPwd,
             email,
             phone,
-            image,
-            anotherQuestion,
              
         });
-        console.log("userRegister",userRegister.image);
+        console.log("User ",User .image);
 
-        console.log(userRegister);
+        console.log(User );
 
-
-        // const userInfo = {
-        //     _id: userRegister._id,
-        //     firstName: userRegister.firstName,
-        //     lastName: userRegister.lastName,
-        //     email: userRegister.email,
-        //     phone: userRegister.phone
-        // }
-        // const accessToken = jwt.sign(userInfo, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '15m' })
-        // const refreshToken = jwt.sign({ email: userRegister.email }, process.env.REFRESH_TOKEN_SECRET, { expiresIn: '7d' })
-        // res.cookie("jwt", refreshToken, {
-        //     httpOnly: true,
-        //     maxAge: 7 * 24 * 60 * 60 * 100
-        // })
-        // console.log(accessToken);
-
-        // const useraccessToken = {
-        //     accessToken: accessToken,
-        //     userRegister: userRegister
-
-        // }
-        // res.json(useraccessToken)
 
         // החזר תגובת הצלחה עם פרטי המשתמש שנוצרו
         return res.status(201).json({
             error: false,
             message: "User created successfully",
             data: {
-                _id: userRegister._id,
-                firstName: userRegister.firstName,
-                lastName: userRegister.lastName,
-                email: userRegister.email
+                _id: User ._id,
+                name: User .name,
+                phone: User .phone,
+                email: User .email
             }
         })
     
@@ -127,10 +80,10 @@ const addUserRegister = async (req, res) => {
 };
 
 // פונקציית אסינכרון כדי לאחזר את כל המשתמשים
-const getAllUserRegister = async (req, res) => {
+const getAllUser  = async (req, res) => {
     try {
         // מצא את כל המשתמשים במסד הנתונים רק את האלה שהם משתמשים - לקוחות והמר לאובייקטי JavaScript רגילים
-        const userList = await UserRegister.find({ roles: { $ne: 'ADMIN' }, deleted: false, }, { password: 0, roles: 0 }).lean();
+        const userList = await User .find({ roles: { $ne: 'ADMIN' }, deleted: false, }, { password: 0, roles: 0 }).lean();
 
         // בדוק אם קיימים משתמשים; אם לא, החזר מערך ריק
         if (!userList || userList.length === 0) {
@@ -158,98 +111,43 @@ const getAllUserRegister = async (req, res) => {
     }
 }
 
-// פונקציית אסינכרון כדי לאחזר משתמש לפי מזהה
-const getUserRegisterById = async (req, res) => {
-    // חלץ מזהה משתמש מפרמטרי הבקשה
-    const { id } = req.params;
-
-    try {
-        // מצא משתמש לפי מזהה והמר לאובייקט JavaScript רגיל
-        const userRegister = await UserRegister.findById(id).lean();
-
-        // בדוק אם המשתמש קיים; אם לא, החזר תגובת שגיאה
-        if (!userRegister) {
-            return res.status(404).json({
-                error: true,
-                message: 'No userRegister found',
-                data: null
-            });
-        }
-
-        // עדכן את הסטטוס של המשתמש ל-true
-        const updatedUserRegister = await UserRegister.findByIdAndUpdate(
-            id,
-            { $set: { view: true } },
-            { new: true } // מחזיר את המסמך המעודכן
-        ).lean();
-
-        // החזר תגובת הצלחה עם פרטי המשתמש המעודכנים
-        res.status(200).json({
-            error: false,
-            message: "",
-            data: {
-                _id: updatedUserRegister._id,
-                firstName: updatedUserRegister.firstName,
-                lastName: updatedUserRegister.lastName,
-                email: updatedUserRegister.email,
-                active: updatedUserRegister.active,
-                phone: updatedUserRegister.phone
-            }
-        });
-
-    } catch (error) {
-        // טיפול בשגיאות
-        res.status(500).json({
-            error: true,
-            message: 'Internal server error',
-            data: null
-        });
-    }
-};
-
-
 // פונקציית אסינכרון לעדכון משתמש
-const updateUserRegister = async (req, res) => {
-    // נתח מחרוזת תאריך לאובייקט Date
-    const image = (req.file?.filename ? req.file.filename : "")
+const updateUser  = async (req, res) => {
+    
 console.log(req.file,);
 
     // גוף הבקשה לפירוק
     const { _id,
-        firstName,
-        lastName,
+        name,
         password,
         email,
         phone,
-        anotherQuestion,
-        active
     } = req.body;
 
-    // if (!_id || !firstName || !password || !lastName || !email || !phone) {
+   
         if (!_id) {
 
         return res.status(400).json({
             error: true,
-            // message: 'id || firstName || password || lastName || email || phone  are required',
             message: 'id   are required',
 
             data: null
         })
     }
     // בדוק אם מסופק מזהה משתמש
-    const userRegister = await UserRegister.findById(_id);
-    if (!userRegister) {
+    const User  = await User .findById(_id);
+    if (!User ) {
         return res
             .status(400).json({
                 error: true,
-                message: "no userRegister found",
+                message: "no User  found",
                 data: null
             });
     }
 
 
     // אימות: בדיקה אם המייל כבר קיים במערכת
-    const existingUseremail = await UserRegister.findOne({ email: email });
+    const existingUseremail = await User .findOne({ email: email });
     if (existingUseremail && existingUseremail._id.toString() !== _id) {
         return res.status(400).json({
             error: true,
@@ -259,50 +157,38 @@ console.log(req.file,);
     }
     if (password) {
         const hashpwd = await bcrypt.hash(password, 10)
-        userRegister.password = hashpwd
+        User .password = hashpwd
     }
 
 
 
 // Set firstName if it's provided, otherwise keep the existing value
-userRegister.firstName = firstName ? firstName : userRegister.firstName;
+User .name = name ? name : User .name;
 
-// Set lastName if it's provided, otherwise keep the existing value
-userRegister.lastName = lastName ? lastName : userRegister.lastName;
+//
 
 // Set email if it's provided, otherwise keep the existing value
-userRegister.email = email ? email : userRegister.email;
+User .email = email ? email : User .email;
 
 // Set phone if it's provided, otherwise keep the existing value
-userRegister.phone = phone ? phone : userRegister.phone;
+User .phone = phone ? phone : User .phone;
 
-// Set anotherQuestion if it's provided, otherwise keep the existing value
-userRegister.anotherQuestion = anotherQuestion ? anotherQuestion : userRegister.anotherQuestion;
-
-// Set active if it's provided, otherwise keep the existing value
-userRegister.active = active !== undefined ? active : userRegister.active;
-userRegister.view = true;
-
-if (image) {
-    userRegister.image = image;
-}
-// Save the updated userRegister
-const updateUser = await userRegister.save();
+// Save the updated User 
+const updateUser = await User .save();
 
     res.json({
         error: false,
         message: "",
         data: {
             _id: updateUser._id,
-            firstName: updateUser.firstName,
-            lastName: updateUser.lastName,
+            name: updateUser.name,
             email: updateUser.email,
-            image: updateUser.image
+            phone: updateUser.phone
         }
     });
 };
 
-const deleteUserRegister = async (req, res) => {
+const deleteUser  = async (req, res) => {
     const { _id } = req.body
     if (!_id) {
         return res.status(400).json({
@@ -311,30 +197,29 @@ const deleteUserRegister = async (req, res) => {
             data: null
         })
     }
-    const userRegister = await UserRegister.findById(_id)
-    if (!userRegister) {
+    const User  = await User .findById(_id)
+    if (!User ) {
         return res.status(400).json({
             error: true,
-            message: "No userRegister found",
+            message: "No User  found",
             data: null
         })
     }
-    userRegister.deleted = true
+    User .deleted = true
 
-    const deletUser = await userRegister.save()
+    const deletUser = await User .save()
     res.status(201).json({
         error: false,
         message: '',
-        data: { firstName: userRegister.firstName, _id: userRegister._id }
+        data: { firstName: User .firstName, _id: User ._id }
     })
 
 };
 
 // ייצא את הפונקציות המוגדרות לשימוש בקבצים אחרים
 module.exports = { 
-    getAllUserRegister, 
-    addUserRegister, 
-    getUserRegisterById, 
-    updateUserRegister, 
-    deleteUserRegister, 
+    getAllUser , 
+    addUser , 
+    updateUser , 
+    deleteUser , 
 };
