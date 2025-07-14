@@ -28,7 +28,7 @@ app.use(express.static("public")) // שימוש בתיקיית הקבצים הס
 app.use(express.static(path.join(__dirname, 'app')));
 
 //routes 
-app.use("/api/auth", require("./route/authRouter"))
+app.use("/api/auth", require("./routers/authRouter"))
 
  app.use("/api/Users", require("./routers/routeUser"));
  app.use("/api/contact", require("./routers/routeContact"))
