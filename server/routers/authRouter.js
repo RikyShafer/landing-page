@@ -13,7 +13,7 @@ const storage = multer.diskStorage({
 
 // Initialize multer with the defined storage
 const upload = multer({ storage: storage });
-const authCountroller=require("../controllers/authCountroller")
+const authCountroller=require("../controllers/authController")
 const router =express.Router()
 
 router.post("/login", authCountroller.login)

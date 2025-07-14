@@ -1,217 +1,340 @@
 // ייבא מודולים נדרשים ואת מודל המשתמש
 const { json, text } = require("express");
-const users = require("../models/User");
-const bcrypt =require("bcrypt")
-
+const UserRegister = require("../models/UserRegister");
+const bcrypt = require("bcrypt")
+const jwt = require("jsonwebtoken")
 // פונקציית אסינכרון ליצירת משתמש חדש
-const createUser = async (req, res) => {
-    // Parse date string into a Date object
-    const parsedDate = new Date(req.body.date);
+const addUserRegister = async (req, res) => {
     // פירוק נתוני משתמש מגוף הבקשה
-
-    const { name,
-        username,
+    const {
+        firstName,
+        lastName,
         password,
         email,
-        city,
-        address,
-        number,
         phone,
-        CountryBirth,
-        roles
-
+        anotherQuestion
 
     } = req.body;
-    // Check if the parsed date is valid
-    if (isNaN(parsedDate.getTime())) {
-        return res.status(400).json({ message: 'Invalid date format' });
-    }
-    if (!username || !password || !name) {
-        return res.status(400).json({ message: 'Missing mandatory fields', error: { fields: 'Username, password, and name are required' } });
+
+    const image = (req.file?.filename ? req.file.filename : "")
+
+    console.log(firstName,
+        lastName,
+        password,
+        email,
+        phone,
+        anotherQuestion);
+    if (!firstName || !password || !lastName || !email || !phone) {
+        return res.status(400).json({
+            error: true,
+            message: 'firstName || password || lastName || email || phone  are required',
+            data: null
+        })
     }
 
-    // אימות: בדיקה אם שם המשתמש כבר קיים במערכת
-    const existingUser = await users.findOne({ username: username.toLowerCase() });
-    if (existingUser) {
-        return res.status(400).json({ message: 'Username already exists', error: { username: 'Username must be unique' } });
-    }
+
     // אימות: בדיקה אם המייל  כבר קיים במערכת
-    const eemailUser = await users.findOne({ email: email.toLowerCase() });
-    if (eemailUser) {
-        return res.status(400).json({ message: 'email already exists', error: { username: 'email must be unique' } });
+    const existingUseremail = await UserRegister.findOne({ email: email });
+    if (existingUseremail) {
+        return res.status(400).json({
+            error: true,
+            message: ' email must be unique',
+            data: null
+        })
     }
+
+    //איך צורך הזה יש רק אפשרותת למייל שהוא יחודי 
+    // // Retrieve all users from the database
+    // const allUsers = await UserRegister.find();
+
+    // // אימות: בדיקה אם סיסמה  כבר קיים במערכת
+    // for (const user of allUsers) {
+    //     const match = await bcrypt.compare(password, user.password);
+    //     if (match) {
+    //         return res.status(400).json({
+    //             error: true,
+    //             message: 'Password must be unique',
+    //             data: null
+    //         });
+    //     }
+    // }
+
     const hashedPwd = await bcrypt.hash(password, 10);
 
 
-    // אימות: בדיקה האם התפקיד מתאים לרשימת האפשרויות
-    if (roles && !["ADMIN", "USER"].includes(roles)) {
-        return res.status(400).json({ message: 'Invalid role', error: { roles: 'Invalid role specified' } });
+    try {
+        //  צור משתמש חדש באמצעות מודל המשתמש והנתונים שסופקו
+        const userRegister = await UserRegister.create({
+            firstName,
+            lastName,
+            password: hashedPwd,
+            email,
+            phone,
+            image,
+            anotherQuestion,
+             
+        });
+        console.log("userRegister",userRegister.image);
+
+        console.log(userRegister);
+
+
+        // const userInfo = {
+        //     _id: userRegister._id,
+        //     firstName: userRegister.firstName,
+        //     lastName: userRegister.lastName,
+        //     email: userRegister.email,
+        //     phone: userRegister.phone
+        // }
+        // const accessToken = jwt.sign(userInfo, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '15m' })
+        // const refreshToken = jwt.sign({ email: userRegister.email }, process.env.REFRESH_TOKEN_SECRET, { expiresIn: '7d' })
+        // res.cookie("jwt", refreshToken, {
+        //     httpOnly: true,
+        //     maxAge: 7 * 24 * 60 * 60 * 100
+        // })
+        // console.log(accessToken);
+
+        // const useraccessToken = {
+        //     accessToken: accessToken,
+        //     userRegister: userRegister
+
+        // }
+        // res.json(useraccessToken)
+
+        // החזר תגובת הצלחה עם פרטי המשתמש שנוצרו
+        return res.status(201).json({
+            error: false,
+            message: "User created successfully",
+            data: {
+                _id: userRegister._id,
+                firstName: userRegister.firstName,
+                lastName: userRegister.lastName,
+                email: userRegister.email
+            }
+        })
+    
     }
 
-    try {
-        //         // צור משתמש חדש באמצעות מודל המשתמש והנתונים שסופקו
-        const user = await users.create({
-            name,
-            username,
-            password:hashedPwd,
-            email,
-            city,
-            address,
-            number,
-            phone,
-            date: parsedDate,
-            CountryBirth
-        });
-        // החזר תגובת הצלחה עם פרטי המשתמש שנוצרו
-        return res.status(201).json({ message: 'New user created', user });
-    } catch (error) {
+    
+    catch (error) {
         // החזר תגובת שגיאה אם יצירת המשתמש נכשלת
-        return res.status(400).json({ message: 'Invalid post', error });
+        return res.status(400).json({
+            error: true,
+            message: ' error',
+            data: null
+        })
     }
 };
 
 // פונקציית אסינכרון כדי לאחזר את כל המשתמשים
-const getAllUser = async (req, res) => {
+const getAllUserRegister = async (req, res) => {
     try {
         // מצא את כל המשתמשים במסד הנתונים רק את האלה שהם משתמשים - לקוחות והמר לאובייקטי JavaScript רגילים
-        const userList = await users.find({ roles: { $ne: 'ADMIN' }},{ password: 0, roles: 0 } ).lean();
+        const userList = await UserRegister.find({ roles: { $ne: 'ADMIN' }, deleted: false, }, { password: 0, roles: 0 }).lean();
 
         // בדוק אם קיימים משתמשים; אם לא, החזר מערך ריק
         if (!userList || userList.length === 0) {
-            return res.status(200).json({ message: 'No user found', userList: [] });
+            return res.status(201).json({
+                error: false,
+                message: "No userList  ==0 ",
+                data: []
+            })
         }
-
         // החזר תגובת הצלחה עם רשימת המשתמשים
-        res.status(200).json(userList);
+        // res.status(200).json(userList);
+        res.status(201).json({
+            error: false,
+            message: "",
+            data: userList
+        })
     } catch (error) {
         // החזר תגובת שגיאה אם אחזור משתמשים נכשל
-        res.status(500).json({ message: 'Internal Server Error', error: error.message });
+        console.error("Error adding user:", error);
+        res.status(500).json({
+            error: true,
+            message: "Internal server error",
+            data: null
+        });
     }
 }
 
 // פונקציית אסינכרון כדי לאחזר משתמש לפי מזהה
-const getUserById = async (req, res) => {
+const getUserRegisterById = async (req, res) => {
     // חלץ מזהה משתמש מפרמטרי הבקשה
     const { id } = req.params;
 
-    /// מצא משתמש לפי מזהה והמר לאובייקט JavaScript רגיל
-    const user = await users.findById(id).lean()
-
-    // בדוק אם המשתמש קיים; אם לא, החזר תגובת שגיאה
-    if (!user) {
-        return res.status(400).json({ message: 'No user found' });
-    }
-
-    // החזר תגובת הצלחה עם פרטי המשתמש
-    res.json(user);
-}
-// פונקציית אסינכרון לעדכון משתמש
-const updateUser = async (req, res) => {
-    // נתח מחרוזת תאריך לאובייקט Date
-    const parsedDate = new Date(req.body.date);
-
-  // גוף הבקשה לפירוק
-    const { _id, name, username, password, email, city, address, number, phone, CountryBirth } = req.body;
-
- // בדוק אם מסופק מזהה משתמש
-    if (!_id) {
-        return res.status(400).json({ message: 'User ID is required' });
-    }
-
-// בדוק אם התאריך  חוקי
-    if (isNaN(parsedDate.getTime())) {
-        return res.status(400).json({ message: 'Invalid date format' });
-    }
-
-       // אימות: בדיקה אם שם המשתמש כבר קיים במערכת
-const existingUser = await users.findOne({ username: username.toLowerCase() });
-    if (existingUser && existingUser._id.toString() !== _id) {
-        return res.status(400).json({ message: 'Username already exists', error: { username: 'Username must be unique' } });
-    }
-
-        // אימות: בדיקה אם המייל  כבר קיים במערכת
-const emailUser = await users.findOne({ email: email.toLowerCase() });
-    if (emailUser && emailUser._id.toString() !== _id) {
-        return res.status(400).json({ message: 'Email already exists', error: { email: 'Email must be unique' } });
-    }
-
     try {
-// גיבש את הסיסמה אם סופקת סיסמה חדשה
-        let hashedPwd;
-        if (password) {
-            hashedPwd = await bcrypt.hash(password, 10);
+        // מצא משתמש לפי מזהה והמר לאובייקט JavaScript רגיל
+        const userRegister = await UserRegister.findById(id).lean();
+
+        // בדוק אם המשתמש קיים; אם לא, החזר תגובת שגיאה
+        if (!userRegister) {
+            return res.status(404).json({
+                error: true,
+                message: 'No userRegister found',
+                data: null
+            });
         }
 
-        // בנה את אובייקט העדכון
-        const updateObj = {
-            name,
-            username,
-            email,
-            city,
-            address,
-            number,
-            phone,
-            date: parsedDate,
-            CountryBirth
-        };
-// הוסף סיסמה מגובבת לאובייקט העדכון אם סופק
-        if (hashedPwd) {
-            updateObj.password = hashedPwd;
-        }
+        // עדכן את הסטטוס של המשתמש ל-true
+        const updatedUserRegister = await UserRegister.findByIdAndUpdate(
+            id,
+            { $set: { view: true } },
+            { new: true } // מחזיר את המסמך המעודכן
+        ).lean();
 
-// מצא ועדכן את המשתמש לפי מזהה עם הנתונים שסופקו
-        const user = await users.findByIdAndUpdate(
-            _id,
-            updateObj,
-            { new: true, runValidators: true }
-        );
+        // החזר תגובת הצלחה עם פרטי המשתמש המעודכנים
+        res.status(200).json({
+            error: false,
+            message: "",
+            data: {
+                _id: updatedUserRegister._id,
+                firstName: updatedUserRegister.firstName,
+                lastName: updatedUserRegister.lastName,
+                email: updatedUserRegister.email,
+                active: updatedUserRegister.active,
+                phone: updatedUserRegister.phone
+            }
+        });
 
-       // בדוק אם המשתמש לא נמצא; אם כן, החזר תגובת שגיאה
-        if (!user) {
-            return res.status(404).json({ message: 'User not found' });
-        }
-
-       // החזר תגובת הצלחה עם פרטי המשתמש המעודכנים
-        res.json(`${user.name} updated`);
     } catch (error) {
-        // החזר תגובת שגיאה אם עדכון המשתמש נכשל
-        res.status(500).json({ message: 'Internal Server Error', error: error.message });
+        // טיפול בשגיאות
+        res.status(500).json({
+            error: true,
+            message: 'Internal server error',
+            data: null
+        });
     }
 };
 
 
-const deleteUser = async (req, res) => {
-    // Find and delete the User
-    const { id } = req.body;
-    const user = await users.findByIdAndDelete({ _id: id }).exec();
+// פונקציית אסינכרון לעדכון משתמש
+const updateUserRegister = async (req, res) => {
+    // נתח מחרוזת תאריך לאובייקט Date
+    const image = (req.file?.filename ? req.file.filename : "")
+console.log(req.file,);
 
-    // Send the response
-    let reply;
-    if (user) {
-        reply = `user '${user.title}' ID ${user._id} deleted`;
-    } else {
-        reply = 'No such user found';
+    // גוף הבקשה לפירוק
+    const { _id,
+        firstName,
+        lastName,
+        password,
+        email,
+        phone,
+        anotherQuestion,
+        active
+    } = req.body;
+
+    // if (!_id || !firstName || !password || !lastName || !email || !phone) {
+        if (!_id) {
+
+        return res.status(400).json({
+            error: true,
+            // message: 'id || firstName || password || lastName || email || phone  are required',
+            message: 'id   are required',
+
+            data: null
+        })
+    }
+    // בדוק אם מסופק מזהה משתמש
+    const userRegister = await UserRegister.findById(_id);
+    if (!userRegister) {
+        return res
+            .status(400).json({
+                error: true,
+                message: "no userRegister found",
+                data: null
+            });
     }
 
-    res.json(reply);
+
+    // אימות: בדיקה אם המייל כבר קיים במערכת
+    const existingUseremail = await UserRegister.findOne({ email: email });
+    if (existingUseremail && existingUseremail._id.toString() !== _id) {
+        return res.status(400).json({
+            error: true,
+            message: 'email must be unique',
+            data: null
+        });
+    }
+    if (password) {
+        const hashpwd = await bcrypt.hash(password, 10)
+        userRegister.password = hashpwd
+    }
+
+
+
+// Set firstName if it's provided, otherwise keep the existing value
+userRegister.firstName = firstName ? firstName : userRegister.firstName;
+
+// Set lastName if it's provided, otherwise keep the existing value
+userRegister.lastName = lastName ? lastName : userRegister.lastName;
+
+// Set email if it's provided, otherwise keep the existing value
+userRegister.email = email ? email : userRegister.email;
+
+// Set phone if it's provided, otherwise keep the existing value
+userRegister.phone = phone ? phone : userRegister.phone;
+
+// Set anotherQuestion if it's provided, otherwise keep the existing value
+userRegister.anotherQuestion = anotherQuestion ? anotherQuestion : userRegister.anotherQuestion;
+
+// Set active if it's provided, otherwise keep the existing value
+userRegister.active = active !== undefined ? active : userRegister.active;
+userRegister.view = true;
+
+if (image) {
+    userRegister.image = image;
+}
+// Save the updated userRegister
+const updateUser = await userRegister.save();
+
+    res.json({
+        error: false,
+        message: "",
+        data: {
+            _id: updateUser._id,
+            firstName: updateUser.firstName,
+            lastName: updateUser.lastName,
+            email: updateUser.email,
+            image: updateUser.image
+        }
+    });
+};
+
+const deleteUserRegister = async (req, res) => {
+    const { _id } = req.body
+    if (!_id) {
+        return res.status(400).json({
+            error: true,
+            message: "id  are required",
+            data: null
+        })
+    }
+    const userRegister = await UserRegister.findById(_id)
+    if (!userRegister) {
+        return res.status(400).json({
+            error: true,
+            message: "No userRegister found",
+            data: null
+        })
+    }
+    userRegister.deleted = true
+
+    const deletUser = await userRegister.save()
+    res.status(201).json({
+        error: false,
+        message: '',
+        data: { firstName: userRegister.firstName, _id: userRegister._id }
+    })
+
 };
 
 // ייצא את הפונקציות המוגדרות לשימוש בקבצים אחרים
-module.exports = { createUser, getAllUser, getUserById, updateUser, deleteUser }
-
-// // ID - פונקציית אסינכרון לעדכון משתמש לפי ה
-// const updateUserComplete = async (req, res) => {
-//     const { id } = req.params
-//             // מצא את המשתמשים, אך אל תשתמש ב-lean() כאן
-//     const user  = await user.findById(id).exec()
-//     if (!user)
-//         return res.status(400).json("user nod found...")
-//           // עדכן את השדה 'השלם'
-//           user.complete = !user.complete
-//             // שמור את השינויים
-//     await user.save()
-
-//     res.json("succeed")
-
-// }
-
+module.exports = { 
+    getAllUserRegister, 
+    addUserRegister, 
+    getUserRegisterById, 
+    updateUserRegister, 
+    deleteUserRegister, 
+};

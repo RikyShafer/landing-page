@@ -18,8 +18,8 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 const router = express.Router();
 const userRegisterController = require('../controllers/userRegisterController.js');
-const verifyJWT = require("../middleware/verifyJWT");
-const verifyAdmin = require("../middleware/verifyAdmin");
+const verifyJWT = require("../middleware/verifyJWT.js");
+const verifyAdmin = require("../middleware/verifyAdmin.js");
 
 // router.use(verifyJWT);
 // router.use(verifyAdmin);
