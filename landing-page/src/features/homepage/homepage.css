@@ -1,0 +1,48 @@
+.homepage-container {
+    height: 100vh;
+    background: linear-gradient(135deg, #1f1c2c, #928dab);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: #fff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: center;
+    padding: 2rem;
+}
+
+.homepage-logo {
+    width: 120px;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+.homepage-header h1 {
+    font-size: 2.8rem;
+    margin-bottom: 10px;
+}
+
+.homepage-tagline {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    max-width: 500px;
+}
+
+.homepage-button {
+    padding: 12px 28px;
+    font-size: 1.1rem;
+    background-color: linear-gradient(135deg, #2d2846, #a298d7);
+;
+    border: none;
+    border-radius: 30px;
+    color: #242323;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.homepage-button:hover {
+    background-color: #845f68;
+    transform: scale(1.05);
+}
+

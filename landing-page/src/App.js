@@ -1,12 +1,21 @@
 import './App.css';
+import { HashRouter as Router, Routes, Route } from "react-router-dom";
+import Homepage from './features/homepage/homepage';
 
 function App() {
   return (
-    <div className="App">
+
+       <Router>
+            <Routes>
+            {/* <Route element={<CheckLoginNotRequired />} > */}
+                <Route index element={<Homepage />} />
+
       דף נחיתה שלנו
       אלופות העולם
-      
-    </div>
+      </Routes>
+          </Router>
+
+
   );
 }
 
