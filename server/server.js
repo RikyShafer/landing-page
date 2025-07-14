@@ -26,20 +26,14 @@ app.use(express.json()) // השימוש ב-JSON כפורמט להעברת נתו
 app.use(express.static("public")) // שימוש בתיקיית הקבצים הסטטית בשם "public" לקבצי סטטיקה
 // Serve static files from the React app
 app.use(express.static(path.join(__dirname, 'app')));
+
 //routes 
-app.use("/api/UserRegister", require("./route/routeUserRegister"));
 app.use("/api/auth", require("./route/authRouter"))
 
- app.use("/api/Usere", require("./route/routeUsets"));
- app.use("/api/Questionnaire", require("./route/routeQuestionnaire"));
- app.use("/api/contact", require("./route/routeContact"))
- app.use("/api/Conversation", require("./route/routeConversation"))
- app.use("/api", require("./route/fileRoutes")); // Use the file routes
-//  app.use("/api/login", require("./route/jsonwebtoken"));
-
-
-// ניתן לכתוב מסלולים כאן לפי דרישות האפליקציה
-
+ app.use("/api/Users", require("./routers/routeUser"));
+ app.use("/api/contact", require("./routers/routeContact"))
+ app.use("/api/Conversation", require("./routers/routeConversation"))
+ 
 app.get("/",(req,res)=>{ // הגדרת מסלול בשם הפסוקה הראשונה ב-URL
 res.send(`בדיקה האם השרת לדף נחיתה  עובד
   בעזרת ה' יצא לי  מדהים
