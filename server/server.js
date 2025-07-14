@@ -28,11 +28,11 @@ app.use(express.static("public")) // שימוש בתיקיית הקבצים הס
 app.use(express.static(path.join(__dirname, 'app')));
 
 //routes 
-app.use("/api/auth", require("./route/authRouter"))
+app.use("/api/auth", require("./routers/authRouter"))
 
- app.use("/api/Users", require("./routers/routeUser"));
+ app.use("/api/users", require("./routers/routeUser"));
  app.use("/api/contact", require("./routers/routeContact"))
- app.use("/api/Conversation", require("./routers/routeConversation"))
+ app.use("/api/conversation", require("./routers/routeConversation"))
  
 app.get("/",(req,res)=>{ // הגדרת מסלול בשם הפסוקה הראשונה ב-URL
 res.send(`בדיקה האם השרת לדף נחיתה  עובד
