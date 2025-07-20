@@ -13,18 +13,18 @@ body {
 }
 
 .homepage-container {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    padding: 2rem;
-    position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 2rem;
+  position: relative;
 }
 
 .homepage-header {
-    margin-top: 3vh;
-    animation: fadeIn 1s ease-out;
+  margin-top: 3vh;
+  animation: fadeIn 1s ease-out;
 }
 
 .homepage-logo {
@@ -57,7 +57,7 @@ body {
 .homepage-button {
     padding: 16px 42px;
     font-size: 1.15rem;
-    background: linear-gradient(135deg, var(--color-button-gradient-start), var(--color-button-gradient-end));
+    background: var(--color-button-gradient-end);
     border: none;
     border-radius: 35px;
     color: white;
@@ -78,7 +78,7 @@ body {
     left: -75%;
     width: 200%;
     height: 100%;
-    background: linear-gradient(135deg, var(--color-button-before-gradient-start), var(--color-button-before-gradient-end));
+    background: var(--color-button-before-gradient-end);
     opacity: 0.2;
     transform: skewX(-45deg);
     transition: all 0.6s ease;
@@ -86,21 +86,21 @@ body {
 }
 
 .homepage-button:hover::before {
-    left: 100%;
+  left: 100%;
 }
 
 .homepage-button:hover {
     transform: scale(1.07);
     box-shadow: 0 15px 40px var(--color-button-hover-shadow);
-    background: linear-gradient(135deg, var(--color-button-hover-gradient-start), var(--color-button-hover-gradient-end));
+    background: var(--color-button-hover-gradient-end);
 }
 
 .secondary-button {
     padding: 12px 28px;
     font-size: 1rem;
     background: transparent;
-    border: 2px solid var(--color-secondary-button-border);
-    color: var(--color-secondary-button-border);
+    border: 2px solid var(--color-secondary-button-hover-bg);
+    color: var(--color-secondary-button-hover-bg);
     border-radius: 30px;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -110,7 +110,7 @@ body {
 .secondary-button:hover {
     background: var(--color-secondary-button-hover-bg);
     color: var(--color-secondary-button-hover-text);
-    box-shadow: 0 0 20px var(--color-secondary-button-hover-shadow);
+    box-shadow: 0 0 20px var(--color-secondary-button-hover-bg);
 }
 
 .section-title {
@@ -120,12 +120,12 @@ body {
 }
 
 .features {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 25px;
-    max-width: 1200px;
-    margin-bottom: 60px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 25px;
+  max-width: 1200px;
+  margin-bottom: 60px;
 }
 
 .feature {
@@ -157,7 +157,7 @@ body {
 }
 
 .call-to-action {
-    background: linear-gradient(135deg, var(--color-cta-bg-start), var(--color-cta-bg-end));
+    background: var(--color-cta-bg-start);
     padding: 60px 20px;
     width: 100%;
     text-align: center;
@@ -205,7 +205,7 @@ body {
     0%,
     100% {
         transform: scale(1);
-        filter: drop-shadow(0 0 10px var(--color-button-before-gradient-end));
+        filter: drop-shadow(0 0 10px #00f2ff);
     }
 
     50% {
