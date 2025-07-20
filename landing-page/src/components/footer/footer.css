@@ -28,8 +28,13 @@
 }
 
 @keyframes shimmer {
-  0% { left: -30%; }
-  100% { left: 100%; }
+  0% {
+    left: -30%;
+  }
+
+  100% {
+    left: 100%;
+  }
 }
 
 .footer-content {
@@ -81,7 +86,6 @@
   font-size: 1.6rem;
   font-weight: bold;
   background: linear-gradient(135deg, var(--color-button-hover-gradient-start), var(--color-button-hover-gradient-end));
-  -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
@@ -123,6 +127,7 @@
     opacity: 0;
     transform: translateY(40px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
