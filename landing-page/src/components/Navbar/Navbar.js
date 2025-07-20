@@ -53,7 +53,8 @@ const Navbar = () => {
 
   return (
     <div className="navbarBox">
-      <img className="iphone-menu" src="/menu.svg" onClick={toggleMenu} />
+      {/* for mobile only */}
+      <img className="iphone-menu" onClick={toggleMenu} />
 
       {isMenuOpen && (
         <div className="navbar-under-homepage">
