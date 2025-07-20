@@ -1,49 +1,127 @@
+/* FOOTER יוקרתי עם תוכן ממורכז ואלמנטים בצדדים */
+
 .footer {
-  background-color: #928dab; /* סגול אינדיגו כהה */
-  color: #fff;
-  padding: 30px 20px;
+  background: linear-gradient(135deg, #130f24, #21103f);
+  color: #ffffff;
+  padding: 50px 40px 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: 'Varela Round', sans-serif;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  position: relative;
+  overflow: hidden;
+  animation: fadeIn 1.8s ease-in-out;
+}
+
+.footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -30%;
+  width: 160%;
+  height: 100%;
+  background: linear-gradient(120deg, rgba(138, 111, 255, 0.08), rgba(0, 242, 255, 0.05));
+  transform: skewX(-25deg);
+  animation: shimmer 15s linear infinite;
+  z-index: 0;
+}
+
+@keyframes shimmer {
+  0% { left: -30%; }
+  100% { left: 100%; }
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  z-index: 1;
+  width: 100%;
+  max-width: 1100px;
+  gap: 20px;
+}
+
+.footer-left {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex: 1;
+  min-width: 220px;
+  justify-content: flex-start;
+}
+
+.footer-center {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  gap: 20px;
-  font-family: 'Segoe UI', sans-serif;
-  animation: fadeIn 1.5s ease-in-out;
+  flex: 2;
+  min-width: 280px;
+  gap: 10px;
+}
+
+.footer-right {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex: 1;
+  min-width: 220px;
 }
 
 .footer h1 {
   margin: 0;
-  font-size: 1.2rem;
+  font-size: 1.35rem;
+  color: #e3ddff;
+  letter-spacing: 0.5px;
 }
 
-.footer .footer-address,
+.footer .footer-address {
+  font-size: 1.6rem;
+  font-weight: bold;
+  background: linear-gradient(135deg, #8c4dff, #18e0f7);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
 .footer .studio {
-  font-size: 1.1rem;
-  color: #dcd0ff;
+  font-size: 1.25rem;
+  color: #c5b2ff;
+}
+
+.footer .footer-contactus {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 18px;
 }
 
 .footer .footer-contactus a {
-  color: #ffffff;
-  margin: 0 10px;
-  font-size: 2rem;
-  transition: transform 0.3s ease, color 0.3s ease;
+  color: #00e6ff;
+  font-size: 2.3rem;
+  transition: all 0.4s ease;
+  text-shadow: 0 0 15px rgba(0, 242, 255, 0.6);
 }
 
 .footer .footer-contactus a:hover {
-  color: #dda0dd; /* סגול בהיר */
-  transform: scale(1.2);
+  color: #c678ff;
+  transform: scale(1.25) rotate(-4deg);
+  text-shadow: 0 0 25px #d58dff;
 }
 
 .footer .copyright {
-  font-size: 0.9rem;
-  color: #cccccc;
+  font-size: 0.95rem;
+  color: #a095c2;
+  text-align: right;
+  margin-top: 0;
+  z-index: 1;
 }
 
-/* אנימציה עדינה */
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(30px);
+    transform: translateY(40px);
   }
   to {
     opacity: 1;
@@ -51,14 +129,29 @@
   }
 }
 
-/* מובייל */
 @media (max-width: 768px) {
-  .footer {
-    padding: 20px 10px;
-    gap: 15px;
+  .footer-content {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 25px;
+  }
+
+  .footer h1 {
+    font-size: 1.15rem;
+  }
+
+  .footer .footer-contactus {
+    justify-content: center;
   }
 
   .footer .footer-contactus a {
-    font-size: 1.8rem;
+    font-size: 2.1rem;
+  }
+
+  .footer .copyright {
+    font-size: 0.85rem;
+    text-align: center;
+    margin-top: 20px;
   }
 }
