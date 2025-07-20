@@ -1,10 +1,10 @@
-import {  useLocation, NavLink } from "react-router-dom";
+import { useLocation, NavLink } from "react-router-dom";
 import { useState } from "react";
 import './navbar.css';
 // import useAuth from "../../hooks/useAuth";
 // import { useSendLogoutMutation } from "../../features/auth/authApiSlice";
 //import { MdLogout, MdDensityMedium, MdEmojiPeople, MdFace, MdOutlinePermIdentity, MdOutlineSearch } from "react-icons/md";
-import { MdLogout} from "react-icons/md";
+import { MdLogout } from "react-icons/md";
 
 import "./navbar.css"
 
@@ -56,8 +56,7 @@ const Navbar = () => {
   return (
     <div className="navbarBox">
       {/* for mobile only */}
-      <img className="iphone-menu" onClick={toggleMenu} />
-
+      <img className="iphone-menu" onClick={toggleMenu} alt="תפריט ראשי" />
       {isMenuOpen && (
         <div className="navbar-under-homepage">
           <NavLink to="/dash/about" className={({ isActive }) => getNavLinkClass(isActive)}>אודות</NavLink>
@@ -88,7 +87,7 @@ const Navbar = () => {
 
       </div>
       <div className="navbar-under-homepage">
-        <img className="logo-homepage" src="/logo.png" />
+        <img className="logo-homepage" src="/logo.png" alt="לוגו האתר" />
         <NavLink to="/dash/about" className={({ isActive }) => getNavLinkClass(isActive)}>אודות</NavLink>
         <NavLink to="/dash/astro" className={({ isActive }) => getNavLinkClass(isActive)}>אסטרולוגיה</NavLink>
         <NavLink to="/dash/diagnosis" className={({ isActive }) => getNavLinkClass(isActive)}>אבחונים</NavLink>

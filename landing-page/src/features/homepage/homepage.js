@@ -14,7 +14,7 @@ const Homepage = () => {
                 <img src="logo.png" alt="PeakCode Logo" className="homepage-logo" />
                 <p className="homepage-subtitle">אתרים שמייצרים תוצאות</p>
                 <p className="homepage-tagline">
-                    בואו נבנה לכם אתר עם נוכחות – עיצוב מהפנט, חוויית משתמש מוקפדת, וביצועים עוצמתיים. 
+                    בואו נבנה לכם אתר עם נוכחות – עיצוב מהפנט, חוויית משתמש מוקפדת, וביצועים עוצמתיים.
                     אני כאן כדי לקחת את העסק שלכם לשלב הבא בדיגיטל.
                 </p>
                 <button className="homepage-button" onClick={openModal}>לקביעת שיחה →</button>
