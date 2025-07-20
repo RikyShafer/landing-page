@@ -1,321 +1,136 @@
+
+/* עוטף ראשי של הניווט */
 .navbarBox {
-    display: flex;
-    flex-direction: column;
-    max-height: 200px;
-
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background-color: var(--color-background-gradient-end);
+  font-family: "Varela Round";
 }
 
-.iphone-menu {
-    display: none;
+/* תפריט עליון (ברוך הבא / יציאה וכו') */
+.navbar-top-homepage {
+  background-color: var(--color-background-gradient-start);
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 40px;
+  z-index: 999;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 0 20px;
+  color: var(--color-text-primary);
 }
 
-.navbar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 60px;
-    z-index: 100;
-    /* נשאר נמוך יותר מהפופאפ */
-    background-color: black;
-    border-bottom: 3px solid var(--text);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+/* אזור ניווט תחתון רגיל */
+.navbar-under-homepage {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 50px 20px 10px;
+  gap: 20px;
+  background-color: var(--color-background-gradient-end);
+  color: var(--color-text-primary);
+  border-bottom: 1px solid var(--color-button-gradient-start);
+  direction: rtl;
+  font-weight: 600;
+  font-size: 15px;
+  z-index: 10;
 }
 
-.nav-text {
-    padding: 60px;
-    margin: 20px;
-    max-width: 40vw;
+.navbar-under-homepage a,
+.navbar-under-homepage button {
+  background: none;
+  border: none;
+  color: var(--color-text-primary);
+  font-size: 1rem;
+  cursor: pointer;
 }
 
-.nav-logo {
-    border-radius: 5px;
-    background-color: var(--text);
-    height: 70px;
-    width: 70px;
-    margin-top: 30px;
-    padding-top: 10px;
-    z-index: 100;
-    position: fixed;
+.navbar-under-homepage a:hover,
+.navbar-under-homepage button:hover {
+  color: var(--color-button-hover-gradient-end);
 }
 
-.nav-title {
-    margin: 30px;
-    padding: 60px;
+/* לינק פעיל */
+.navbar-under-homepage a.active-navlink-nav {
+  color: var(--color-button-hover-gradient-end);
 }
 
-.nav-menu {
-    display: flex;
-    gap: 20px;
-    align-items: center;
-}
-
-.logout-button {
-    padding: 20px;
-    margin: 5px 0px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    cursor: pointer;
-    background: none;
-    border: none;
-    width: 100%;
-    border-radius: 10px;
-    color: var(--text);
-    font-size: 1rem;
-    font-family: "Varela Round";
-}
-
-/* 
-.nav-search {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    background-color: var(--text);
-    padding: 10px;
-    border-radius: 10px;
-    color: var(--main)
-}
-
-.nav-input {
-    background-color: transparent;
-    border: none;
-    color: var(--text);
-} */
-
-.nav-icons {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-}
-
+/* אייקון "היי" עם תמונה */
 .nav-hello {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 20rem;
-    font-size: 1.1rem;
-    color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.9rem;
 }
 
 .account-profile {
-    display: flex;
-    align-items: center;
-    color: var(--text);
-    /* padding: 10px; */
-    /* gap: 10px; */
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    /* left: 1196px; */
-    margin-top: 0px;
-    padding: 5px;
+  width: 24px;
+  height: 24px;
+  object-fit: cover;
 }
 
-
-/* צבע בעת ריחוף (hover) */
-.navbar-under-homepage a:hover {
-    color: var(--lightBlue);
-    cursor: pointer;
-
+/* כפתור יציאה */
+.logout-button {
+  padding: 8px 12px;
+  margin-right: 20px;
+  background: none;
+  border: none;
+  color: var(--color-text-primary);
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }
 
-/* צבע כאשר הלינק פעיל (active) */
-.navbar-under-homepage a.active-navlink-nav {
-    color: var(--lightBlue);
+/* תפריט מובייל נפתח */
+.mobile-menu {
+  display: none;
+  flex-direction: column;
+  gap: 15px;
+  padding: 15px 20px;
+  background-color: var(--color-background-gradient-end);
+  position: absolute;
+  top: 40px;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
 }
 
-
-
-.contact-button:hover {
-    color: var(--lightBlue);
-    cursor: pointer;
+/* אייקון המבורגר */
+.iphone-menu {
+  display: none;
+  cursor: pointer;
+  position: absolute;
+  left: 10px;
+  top: 5px;
+  width: 32px;
+  height: 32px;
+  z-index: 1100;
 }
 
-.heart-home,
-.shopping-cart-home,
-.bell {
-    position: relative;
-    /* שינוי ל-relative כדי לאפשר מיקום טבעי בתוך ה-navbar */
-    width: 30px;
-    /* התאמת גודל האייקונים */
-    height: 30px;
-    background-color: transparent;
-}
-
-.navbar-under-homepage {
-    justify-content: flex-start;
-    display: flex;
-    flex-direction: row;
-    /* justify-content: flex-end; */
-    align-items: center;
-    padding: 10px;
-    gap: 20px;
-    background-color: #fff;
-    position: fixed;
-    width: 100vw;
-    height: 40px;
-    /* left: 0px; */
-    top: 40px;
-    color: var(--orange);
-    direction: rtl;
-    font-family: "Varela Round";
-    font-style: normal;
-    font-weight: 600;
-    font-size: 15px;
-    border-bottom: 1px solid #00008b;
-    z-index: 1;
-}
-
-.navbar-under-homepage button {
-
-    left: 200px;
-    background-color: transparent;
-    color: var(--orange);
-    border: none;
-    font-family: "Varela Round";
-    font-style: normal;
-    font-weight: 600;
-    font-size: 15px;
-
-}
-
-.navbar-under-homepage button:hover,
-.navbar-under-homepage :hover {
-    color: var(--lightBlue);
-    cursor: pointer;
-}
-
+/* לוגו */
 .logo-homepage {
-    display: flex;
-    align-items: center;
-    /* padding: 10px; */
-    gap: 10px;
-    position: relative;
-    width: 80px;
-    height: 80px;
-    margin-left: 20px;
+  width: 40px;
+  height: auto;
+  margin-left: 10px;
 }
 
-/* אייקונים */
-.heart-home {
-    display: flex;
-    align-items: center;
-    width: 30px;
-    height: 30px;
-    margin-top: 0px;
-}
+@media (max-width: 768px) {
+  .navbar-under-homepage {
+    display: none;
+  }
 
-.shopping-cart-home,
-.bell {
-
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    width: 35px;
-    height: 32px;
-    transform: matrix(-1, 0, 0, 1, 0, 0);
-}
-
-
-.home-page-casing {
-    background: radial-gradient(circle, #191923 0%, #1d1e3d 40%, #5b5d6e 100%);
-    min-height: 200vh;
-    display: flex;
-    flex-direction: column;
-}
-
-/* .private-zone-link {
-    position: relative;
-    right: 40vw;
-} */
-.personal-zone {
-    position: relative;
-    display: flex;
-    margin-left: 5vw;
-    margin-right: auto;
-}
-
-.dropdown-toggle {
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 16px;
-    color: var(--lightBlue);
-    text-align: center;
-}
-
-.dropdown-menu {
-    position: absolute;
-    top: 100%;
-    right: 0;
-    /* יישור התפריט לנקודת הכפתור */
-    background-color: white;
-    border-radius: 5px;
-    min-width: 150px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    z-index: 1;
-}
-
-.dropdown-item {
+  .iphone-menu {
     display: block;
-    padding: 10px;
-    text-decoration: none;
-    font-size: 14px;
-    color: var(--lightBlue);
-}
+  }
 
-.dropdown-item:hover {
-    background-color: var(--lightBlue);
-    border-radius: 5px;
-    color: var(--text) !important;
-}
-
-.navbar-top-homepage {
-    background-color: var(--mainDark);
-
-    position: fixed;
-    top: 0;
-    width: 100%;
-    height: 40px;
-    z-index: 999;
-}
-
-.navbar-under-homepage {
-    position: fixed;
-    top: 40px;
-    width: 100%;
-    z-index: 998;
-}
-
-@media (max-width: 480px) {
-    .navbarBox {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        /* יישור התמונה בצד */
-    }
-
-    .iphone-menu {
-        display: block;
-
-        cursor: pointer;
-
-        position: absolute;
-        width: 32px;
-        height: 37px;
-        padding: 5px;
-        z-index: 100;
-    }
-
-    .navbar-under-homepage {
-        display: none;
-
-    }
-
-    .navbar-top-homepage {
-        display: none !important;
-    }
+  .mobile-menu {
+    display: flex;
+  }
 }

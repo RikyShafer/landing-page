@@ -1,7 +1,7 @@
 /* FOOTER יוקרתי עם תוכן ממורכז ואלמנטים בצדדים */
 
 .footer {
-  background: linear-gradient(135deg, #130f24, #21103f);
+  background: linear-gradient(135deg, var(--color-cta-bg-start), var(--color-cta-bg-end));
   color: #ffffff;
   padding: 50px 40px 30px;
   display: flex;
@@ -21,7 +21,7 @@
   left: -30%;
   width: 160%;
   height: 100%;
-  background: linear-gradient(120deg, rgba(138, 111, 255, 0.08), rgba(0, 242, 255, 0.05));
+  background: linear-gradient(120deg, var(--color-logo-shadow-start), var(--color-button-before-gradient-end));
   transform: skewX(-25deg);
   animation: shimmer 15s linear infinite;
   z-index: 0;
@@ -73,21 +73,21 @@
 .footer h1 {
   margin: 0;
   font-size: 1.35rem;
-  color: #e3ddff;
+  color: var(--color-text-primary);
   letter-spacing: 0.5px;
 }
 
 .footer .footer-address {
   font-size: 1.6rem;
   font-weight: bold;
-  background: linear-gradient(135deg, #8c4dff, #18e0f7);
+  background: linear-gradient(135deg, var(--color-button-hover-gradient-start), var(--color-button-hover-gradient-end));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .footer .studio {
   font-size: 1.25rem;
-  color: #c5b2ff;
+  color: var(--color-text-secondary);
 }
 
 .footer .footer-contactus {
@@ -98,21 +98,21 @@
 }
 
 .footer .footer-contactus a {
-  color: #00e6ff;
+  color: var(--color-button-hover-gradient-end);
   font-size: 2.3rem;
   transition: all 0.4s ease;
-  text-shadow: 0 0 15px rgba(0, 242, 255, 0.6);
+  text-shadow: 0 0 15px var(--color-button-before-gradient-end);
 }
 
 .footer .footer-contactus a:hover {
-  color: #c678ff;
+  color: var(--color-button-hover-gradient-start);
   transform: scale(1.25) rotate(-4deg);
-  text-shadow: 0 0 25px #d58dff;
+  text-shadow: 0 0 25px var(--color-logo-shadow-start);
 }
 
 .footer .copyright {
   font-size: 0.95rem;
-  color: #a095c2;
+  color: var(--color-text-footer);
   text-align: right;
   margin-top: 0;
   z-index: 1;

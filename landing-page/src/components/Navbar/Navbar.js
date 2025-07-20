@@ -6,7 +6,6 @@ import './navbar.css';
 //import { MdLogout, MdDensityMedium, MdEmojiPeople, MdFace, MdOutlinePermIdentity, MdOutlineSearch } from "react-icons/md";
 import { MdLogout} from "react-icons/md";
 
-import "./navbar.css"
 
 
 const Navbar = () => {

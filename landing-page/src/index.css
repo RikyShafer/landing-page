@@ -1,105 +1,146 @@
 @import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
 
 :root {
-	/* משתנים שנשתמש באתר */
-	--main: #1d1e3d;
-	--mainDark: #191923;
-	--mainLight: #5b5d6e;
-	--text: #FFFFFF;
-	--highlightColor: rgb(67, 97, 134);
-	--lightBlue: teal;
-	--logoBlue: #0A9BB5;
-	/* --gradiant:radial-gradient(circle, #191923 0%, #1d1e3d 40%, #5b5d6e 100%); */
-	--orange: #E49928;
-	--orangeDark: #faa82e;
+    /* צבעים בסיסיים שהבאת */
+    --main: #1d1e3d;
+    --mainDark: #191923;
+    --mainLight: #5b5d6e;
+    --text: #FFFFFF;
+    --highlightColor: rgb(67, 97, 134);
+    --lightBlue: teal;
+    --logoBlue: #0A9BB5;
+    --orange: #E49928;
+    --orangeDark: #faa82e;
+
+    /* צבעים מהעיצוב המקורי (סגול כהה, כחול אלקטרי, טורקיז וכו') */
+    --color-background-gradient-start: #1a1333;
+    --color-background-gradient-end: #2c235a;
+
+    --color-logo-shadow-start: rgba(142, 120, 240, 0.8);
+--color-button-gradient-end: #2e255e; /* במקום טורקיז */
+--color-button-hover-gradient-end: #2e255e;
+--color-button-before-gradient-end: #2e255e;
+--color-button-hover-shadow: rgba(128, 101, 247, 0.8);
+--color-box-shadow-secondary-hover: #2e255e;
+
+
+    --color-text-primary: #e5e5ff;
+    --color-text-secondary: #c7b7ff;
+    --color-text-tagline: #d6d4ff;
+    --color-text-feature-title: #bbaeff;
+    --color-text-feature-paragraph: #dfddff;
+    --color-text-footer: #9a96bc;
+    --color-text-cta-title: #f0f0ff;
+    --color-text-cta-subtitle: #cfc8ff;
+
+--color-secondary-button-border: #2e255e;
+--color-secondary-button-hover-bg: #2e255e;
+    --color-secondary-button-hover-text: #1a1333;
+
+    --color-feature-bg: rgba(255, 255, 255, 0.05);
+    --color-feature-border: rgba(255, 255, 255, 0.1);
+    --color-feature-box-shadow: rgba(0,0,0,0.3);
+    --color-feature-box-shadow-hover: rgba(0,0,0,0.5);
+
+    --color-box-shadow-button: rgba(0, 0, 0, 0.4);
+    --color-box-shadow-button-hover: rgba(0, 0, 0, 0.6);
+    --color-box-shadow-secondary-hover: #18c3e2;
+
+    --color-cta-bg-start: #231e38;
+    --color-cta-bg-end: #2e255e;
+    --color-cta-box-shadow-inset: rgba(255,255,255,0.02);
 }
 
+/* הגדרות כלליות */
 * {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
-
 
 html {
-	font-family: "Varela Round", serif;
-	font-weight: 400;
-	font-style: normal;
-	direction: rtl;
-	text-align: right;
+    font-family: "Varela Round", serif;
+    font-weight: 400;
+    font-style: normal;
+    direction: rtl;
+    text-align: right;
 }
 
 button {
-	font-family: "Varela Round", serif;
+    font-family: "Varela Round", serif;
 }
 
 body {
-	background: radial-gradient(circle, #191923 0%, #1d1e3d 40%, #5b5d6e 100%);
-	color: var(--text);
-	margin-top: 3vw;
-	font-family: "Varela Round", serif;
+    background: radial-gradient(circle, var(--mainDark) 0%, var(--main) 40%, var(--mainLight) 100%);
+    color: var(--text);
+    margin-top: 3vw;
+    font-family: "Varela Round", serif;
+    overflow-x: hidden;
 }
+
+/* אפשר להשתמש גם ברקע עם המשתנים מהעיצוב המקורי - אם רוצים - לדוגמה: */
+/* background: linear-gradient(135deg, var(--color-background-gradient-start), var(--color-background-gradient-end)); */
 
 a {
-	color: inherit;
-	text-decoration: none;
+    color: inherit;
+    text-decoration: none;
 }
 
-.popup {
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100vw;
-	height: 100vh;
-	z-index: 1001;
-	background: rgba(67, 67, 67, 0.4);
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	overflow: hidden;
+/* שאר העיצוב שלך נשאר כפי שהוא, עם שימוש במשתנים הצבעים */
 
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1001;
+    background: rgba(67, 67, 67, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
 }
 
 .popup-wrapper {
-	position: relative;
-	max-width: 90%;
-	max-height: 90%;
-	width: 500px;
-	background: white;
-	border-radius: 10px;
-	padding: 20px;
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+    position: relative;
+    max-width: 90%;
+    max-height: 90%;
+    width: 500px;
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
 }
 
 .popup-wrapper .close-popup {
-	position: absolute;
-	top: 10px;
-	right: 10px;
-	cursor: pointer;
-	z-index: 1002;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    z-index: 1002;
 }
 
 .children-popup {
-	padding: 20px;
+    padding: 20px;
 }
 
-
 @media (max-width: 480px) {
-	body {
-		font-size: 14px;
-		line-height: 1.5;
-		box-sizing: border-box;
-		margin-top: 0;
-	}
+    body {
+        font-size: 14px;
+        line-height: 1.5;
+        box-sizing: border-box;
+        margin-top: 0;
+    }
 
-	img {
-		max-width: 100%;
-		height: auto;
-	}
+    img {
+        max-width: 100%;
+        height: auto;
+    }
 }
 
 @media screen and (max-width: 375px) {
-	body {
-		-webkit-font-smoothing: antialiased;
-	}
+    body {
+        -webkit-font-smoothing: antialiased;
+    }
 }
