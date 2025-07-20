@@ -1,16 +1,18 @@
-import { useNavigate, useLocation, NavLink } from "react-router-dom";
-import { useState, useEffect } from "react";
+import {  useLocation, NavLink } from "react-router-dom";
+import { useState } from "react";
 import './navbar.css';
 // import useAuth from "../../hooks/useAuth";
 // import { useSendLogoutMutation } from "../../features/auth/authApiSlice";
-import { MdLogout, MdDensityMedium, MdEmojiPeople, MdFace, MdOutlinePermIdentity, MdOutlineSearch } from "react-icons/md";
+//import { MdLogout, MdDensityMedium, MdEmojiPeople, MdFace, MdOutlinePermIdentity, MdOutlineSearch } from "react-icons/md";
+import { MdLogout} from "react-icons/md";
+
 import "./navbar.css"
 
 
 const Navbar = () => {
 
   //   const [logout, { isSuccess: isLogoutSuccess }] = useSendLogoutMutation()
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
   const location = useLocation();
   //   const { firstname, lastname, image, isUser, isAdmin } = useAuth();
 
