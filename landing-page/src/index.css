@@ -6,50 +6,46 @@
 	--mainDark: #191923;
 	--mainLight: #5b5d6e;
 	--text: #FFFFFF;
-	--highlightColor: rgb(67, 97, 134);
-	--lightBlue: teal;
-	--logoBlue: #0A9BB5;
-	--orange: #E49928;
-	--orangeDark: #faa82e;
-
 	/* צבעים מהעיצוב המקורי (סגול כהה, כחול אלקטרי, טורקיז וכו') */
 	--color-background-gradient-start: #1a1333;
 	--color-background-gradient-end: #2c235a;
 
-	--color-logo-shadow-start: rgba(142, 120, 240, 0.8);
-	--color-button-gradient-end: #2e255e;
+	--color-logo-shadow-start: rgba(138, 111, 255, 0.8);
+	--color-button-gradient-end: linear-gradient(135deg, #7e3ff2, #18c3e2);;
+	--color-button-shadow:rgba(0, 0, 0, 0.4);
+
 	/* במקום טורקיז */
-	--color-button-hover-gradient-end: #2e255e;
-	--color-button-before-gradient-end: #2e255e;
+	--color-button-hover-gradient-end:linear-gradient(135deg, #a74eff, #00e6ff);
+	--color-button-before-gradient-end: linear-gradient(135deg, #ba4aff, #00f2ff);
 	--color-button-hover-shadow: rgba(128, 101, 247, 0.8);
-	--color-box-shadow-secondary-hover: #2e255e;
+
 
 
 	--color-text-primary: #e5e5ff;
 	--color-text-secondary: #c7b7ff;
-	--color-text-tagline: #d6d4ff;
-	--color-text-feature-title: #bbaeff;
-	--color-text-feature-paragraph: #dfddff;
 	--color-text-footer: #9a96bc;
-	--color-text-cta-title: #f0f0ff;
-	--color-text-cta-subtitle: #cfc8ff;
+	--color-title:#e5e5ff;
+	--color-subtitle:#c7b7ff;
+	--color-tagline:#d6d4ff;
 
-	--color-secondary-button-border: #2e255e;
-	--color-secondary-button-hover-bg: #2e255e;
+
+	--color-secondary-button-hover-bg: #18c3e2;
 	--color-secondary-button-hover-text: #1a1333;
 
 	--color-feature-bg: rgba(255, 255, 255, 0.05);
 	--color-feature-border: rgba(255, 255, 255, 0.1);
 	--color-feature-box-shadow: rgba(0, 0, 0, 0.3);
-	--color-feature-box-shadow-hover: rgba(0, 0, 0, 0.5);
+	--color-feature-title: #bbaeff;
+	--color-feature-text: #dfddff;
 
-	--color-box-shadow-button: rgba(0, 0, 0, 0.4);
-	--color-box-shadow-button-hover: rgba(0, 0, 0, 0.6);
-	--color-box-shadow-secondary-hover: #18c3e2;
-
-	--color-cta-bg-start: #231e38;
-	--color-cta-bg-end: #2e255e;
+	--color-cta-bg-start: linear-gradient(135deg, #231e38, #2e255e);
 	--color-cta-box-shadow-inset: rgba(255, 255, 255, 0.02);
+	--color-section-title: #e5e5ff;
+	--color-cta-title: #f0f0ff;	
+	--color-cta-text: #cfc8ff;
+	--color-footer-text: #9a96bc;
+	--color-footer-border: rgba(255, 255, 255, 0.1);
+
 }
 
 /* הגדרות כלליות */
@@ -78,9 +74,6 @@ body {
 	font-family: "Varela Round", serif;
 	overflow-x: hidden;
 }
-
-/* אפשר להשתמש גם ברקע עם המשתנים מהעיצוב המקורי - אם רוצים - לדוגמה: */
-/* background: linear-gradient(135deg, var(--color-background-gradient-start), var(--color-background-gradient-end)); */
 
 a {
     color: inherit;
