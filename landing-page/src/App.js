@@ -4,17 +4,17 @@ import DashLayout from "./components/layout/dash/DashLayout";
 function App() {
   return (
 
-       <Router>
-            <Routes>
-            {/* <Route element={<CheckLoginNotRequired />} > */}
-            <Route path='/' element={<DashLayout />}>
-                <Route index element={<Homepage />} />
+    <Router>
+      <Routes>
+        {/* <Route element={<CheckLoginNotRequired />} > */}
+        <Route path='/' element={<DashLayout />}>
+          <Route index element={<Homepage />} />
 
-      דף נחיתה שלנו
-      אלופות העולם
-      </Route>
+          דף נחיתה שלנו
+          אלופות העולם
+        </Route>
       </Routes>
-          </Router>
+    </Router>
 
 
   );
