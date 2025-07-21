@@ -144,7 +144,7 @@ const UserQuestions = () => {
                 setSelectedQuestion({ ...selectedQuestion, question: e.target.value })
               }
             />
-            {isAdmin && (
+            {/* {isAdmin && (
               <textarea
                 placeholder="עדכן תשובה"
                 value={selectedQuestion.answer || ""}
@@ -152,7 +152,7 @@ const UserQuestions = () => {
                   setSelectedQuestion({ ...selectedQuestion, answer: e.target.value })
                 }
               />
-            )}
+            )} */}
             <button onClick={handleUpdateQuestionAnswer}>עדכן</button>
             <button onClick={() => setSelectedQuestion(null)}>בטל</button>
           </div>
