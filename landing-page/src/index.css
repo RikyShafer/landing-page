@@ -11,11 +11,12 @@
 	--color-background-gradient-end: #2c235a;
 
 	--color-logo-shadow-start: rgba(138, 111, 255, 0.8);
-	--color-button-gradient-end: linear-gradient(135deg, #7e3ff2, #18c3e2);;
-	--color-button-shadow:rgba(0, 0, 0, 0.4);
+	--color-button-gradient-end: linear-gradient(135deg, #7e3ff2, #18c3e2);
+	;
+	--color-button-shadow: rgba(0, 0, 0, 0.4);
 
 	/* במקום טורקיז */
-	--color-button-hover-gradient-end:linear-gradient(135deg, #a74eff, #00e6ff);
+	--color-button-hover-gradient-end: linear-gradient(135deg, #a74eff, #00e6ff);
 	--color-button-before-gradient-end: linear-gradient(135deg, #ba4aff, #00f2ff);
 	--color-button-hover-shadow: rgba(128, 101, 247, 0.8);
 
@@ -24,9 +25,10 @@
 	--color-text-primary: #e5e5ff;
 	--color-text-secondary: #c7b7ff;
 	--color-text-footer: #9a96bc;
-	--color-title:#e5e5ff;
-	--color-subtitle:#c7b7ff;
-	--color-tagline:#d6d4ff;
+	--color-title: #e5e5ff;
+	--color-subtitle: #c7b7ff;
+	--color-tagline: #d6d4ff;
+	--color-dark-purple: #4b427d;
 
 
 	--color-secondary-button-hover-bg: #18c3e2;
@@ -41,7 +43,7 @@
 	--color-cta-bg-start: linear-gradient(135deg, #231e38, #2e255e);
 	--color-cta-box-shadow-inset: rgba(255, 255, 255, 0.02);
 	--color-section-title: #e5e5ff;
-	--color-cta-title: #f0f0ff;	
+	--color-cta-title: #f0f0ff;
 	--color-cta-text: #cfc8ff;
 	--color-footer-text: #9a96bc;
 	--color-footer-border: rgba(255, 255, 255, 0.1);
@@ -50,25 +52,26 @@
 
 /* הגדרות כלליות */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
 }
 
-body, html {
-    overflow-x: hidden;
+body,
+html {
+	overflow-x: hidden;
 }
 
 html {
-    font-family: "Varela Round", serif;
-    font-weight: 400;
-    font-style: normal;
-    direction: rtl;
-    text-align: right;
+	font-family: "Varela Round", serif;
+	font-weight: 400;
+	font-style: normal;
+	direction: rtl;
+	text-align: right;
 }
 
 button {
-    font-family: "Varela Round", serif;
+	font-family: "Varela Round", serif;
 }
 
 body {
@@ -80,8 +83,8 @@ body {
 }
 
 a {
-    color: inherit;
-    text-decoration: none;
+	color: inherit;
+	text-decoration: none;
 }
 
 /* שאר העיצוב שלך נשאר כפי שהוא, עם שימוש במשתנים הצבעים */
@@ -101,44 +104,44 @@ a {
 }
 
 .popup-wrapper {
-    position: relative;
-    max-width: 90%;
-    max-height: 90%;
-    width: 500px;
-    background: white;
-    border-radius: 10px;
-    padding: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+	position: relative;
+	max-width: 90%;
+	max-height: 90%;
+	width: 500px;
+	background: white;
+	border-radius: 10px;
+	padding: 20px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
 }
 
 .popup-wrapper .close-popup {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    cursor: pointer;
-    z-index: 1002;
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	cursor: pointer;
+	z-index: 1002;
 }
 
 .children-popup {
-    padding: 20px;
+	padding: 20px;
 }
 
 @media (max-width: 480px) {
-    body {
-        font-size: 14px;
-        line-height: 1.5;
-        box-sizing: border-box;
-        margin-top: 0;
-    }
+	body {
+		font-size: 14px;
+		line-height: 1.5;
+		box-sizing: border-box;
+		margin-top: 0;
+	}
 
-    img {
-        max-width: 100%;
-        height: auto;
-    }
+	img {
+		max-width: 100%;
+		height: auto;
+	}
 }
 
 @media screen and (max-width: 375px) {
-    body {
-        -webkit-font-smoothing: antialiased;
-    }
+	body {
+		-webkit-font-smoothing: antialiased;
+	}
 }

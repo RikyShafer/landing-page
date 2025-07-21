@@ -63,7 +63,7 @@ const Navbar = () => {
           <NavLink to="/dash/diagnosis" className={({ isActive }) => getNavLinkClass(isActive)}>אבחונים</NavLink>
           <NavLink to="/dash/reviews" className={({ isActive }) => getNavLinkClass(isActive)}>מה אומרים עלינו?</NavLink>
           <NavLink to="/dash/courses" className={({ isActive }) => getNavLinkClass(isActive)}>קורסים</NavLink>
-          <button onClick={() => scrollToSection("contact-section")}>יצירת קשר</button>
+          <button className={({ isActive }) => getNavLinkClass(isActive)} onClick={() => scrollToSection("contact-section")}>יצירת קשר</button>
         </div>
       )}
       <div className="navbar-top-homepage">
@@ -88,11 +88,11 @@ const Navbar = () => {
       <div className="navbar-under-homepage">
         <img className="logo-homepage" src="/logo.png" alt="לוגו האתר" />
         <NavLink to="/dash/about" className={({ isActive }) => getNavLinkClass(isActive)}>אודות</NavLink>
-        <NavLink to="/dash/astro" className={({ isActive }) => getNavLinkClass(isActive)}>אסטרולוגיה</NavLink>
-        <NavLink to="/dash/diagnosis" className={({ isActive }) => getNavLinkClass(isActive)}>אבחונים</NavLink>
+        <NavLink to="/dash/astro" className={({ isActive }) => getNavLinkClass(isActive)}>הפרויקטים שלנו:)</NavLink>
+        <NavLink to="/dash/diagnosis" className={({ isActive }) => getNavLinkClass(isActive)}>פוסטים</NavLink>
         <NavLink to="/dash/reviews" className={({ isActive }) => getNavLinkClass(isActive)}>מה אומרים עלינו?</NavLink>
-        <NavLink to="/dash/courses" className={({ isActive }) => getNavLinkClass(isActive)}>קורסים</NavLink>
-        <button onClick={() => scrollToSection("contact-section")}>יצירת קשר</button>
+        <NavLink to="/dash/courses" className={({ isActive }) => getNavLinkClass(isActive)}>שאלות ותשובות</NavLink>
+        <button className="navlink" onClick={() => scrollToSection("contact-section")}>יצירת קשר</button>
       </div>
     </div>
 
