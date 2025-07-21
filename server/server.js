@@ -32,7 +32,8 @@ app.use("/api/auth", require("./routers/authRouter"))
  app.use("/api/users", require("./routers/routeUser"));
  app.use("/api/contact", require("./routers/routeContact"))
  app.use("/api/conversation", require("./routers/routeConversation"))
- 
+ app.use("/api/question", require("./routers/questionAnswerRouter"));
+
 app.get("/",(req,res)=>{ // הגדרת מסלול בשם הפסוקה הראשונה ב-URL
 res.send(`בדיקה האם השרת לדף נחיתה  עובד
   בעזרת ה' יצא לי  מדהים

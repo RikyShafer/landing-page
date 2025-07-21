@@ -91,7 +91,7 @@ const Navbar = () => {
         <NavLink to="/dash/astro" className={({ isActive }) => getNavLinkClass(isActive)}>הפרויקטים שלנו:)</NavLink>
         <NavLink to="/dash/diagnosis" className={({ isActive }) => getNavLinkClass(isActive)}>פוסטים</NavLink>
         <NavLink to="/dash/reviews" className={({ isActive }) => getNavLinkClass(isActive)}>מה אומרים עלינו?</NavLink>
-        <NavLink to="/dash/courses" className={({ isActive }) => getNavLinkClass(isActive)}>שאלות ותשובות</NavLink>
+        <NavLink to="/question_answer" className={({ isActive }) => getNavLinkClass(isActive)}>שאלות ותשובות</NavLink>
         <button className="navlink" onClick={() => scrollToSection("contact-section")}>יצירת קשר</button>
       </div>
     </div>
