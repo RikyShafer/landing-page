@@ -1,7 +1,7 @@
 import { HashRouter as Router, Routes, Route } from "react-router-dom";
 import Homepage from './features/homepage/homepage';
 import DashLayout from "./components/layout/dash/DashLayout";
-import UseraQuestion from "./features/questions/UserQuestions"
+import UseraQuestion from "./features/questions/UserQuestions";
 function App() {
   return (
 
