@@ -1,162 +1,208 @@
-/* FOOTER יוקרתי עם תוכן ממורכז ואלמנטים בצדדים */
-
 .footer {
-  background: linear-gradient(135deg, var(--color-cta-bg-start), var(--color-cta-bg-end));
-  color: #ffffff;
-  padding: 50px 40px 30px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  font-family: 'Varela Round', sans-serif;
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
   position: relative;
-  overflow: hidden;
-  animation: fadeIn 1.8s ease-in-out;
+  width: 100%;
+  overflow-x: hidden; /* ביטול גלילה אופקית */
+  background: linear-gradient(135deg, var(--color-cta-bg-start), var(--color-cta-bg-end));
+  color: var(--color-text-secondary);
+  padding: 50px 20px;
+  font-family: 'Varela Round', sans-serif;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 1.6rem;
+  font-weight: bold;
+  direction: rtl;
 }
 
 .footer::before {
   content: '';
   position: absolute;
   top: 0;
-  left: -30%;
-  width: 160%;
+  left: 0;
+  width: 100%; /* לא לעבור את המסך */
   height: 100%;
-  background: linear-gradient(120deg, var(--color-logo-shadow-start), var(--color-button-before-gradient-end));
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.12) 0%,
+    rgba(200, 200, 200, 0.18) 50%,
+    rgba(100, 100, 100, 0.15) 100%
+  );
   transform: skewX(-25deg);
-  animation: shimmer 15s linear infinite;
+  animation: shimmer 12s linear infinite;
   z-index: 0;
 }
 
 @keyframes shimmer {
   0% {
-    left: -30%;
+    transform: skewX(-25deg) translateX(-100%);
   }
-
   100% {
-    left: 100%;
+    transform: skewX(-25deg) translateX(100%);
   }
-}
-
-.footer-content {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  z-index: 1;
-  width: 100%;
-  max-width: 1100px;
-  gap: 20px;
 }
 
 .footer-left {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  flex: 1;
-  min-width: 220px;
-  justify-content: flex-start;
+  position: absolute;
+  left: 30px;
+  top: 50%;
+  transform: translateY(-50%);
+  white-space: nowrap;
+  color: var(--color-text-footer);
+  font-size: 0.95rem;
+  font-weight: normal;
+  z-index: 2;
 }
 
 .footer-center {
+  max-width: 700px;
+  margin: 0 auto;
+  font-weight: bold;
+  color: white;
+  font-size: 1.6rem;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  text-align: center;
-  flex: 2;
-  min-width: 280px;
   gap: 10px;
+  text-align: center;
+  z-index: 2;
 }
 
-.footer-right {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  flex: 1;
-  min-width: 220px;
-}
-
-.footer h1 {
+.footer-address {
   margin: 0;
-  font-size: 1.35rem;
-  color: var(--color-text-primary);
-  letter-spacing: 0.5px;
-}
-
-.footer .footer-address {
-  font-size: 1.6rem;
-  font-weight: bold;
-  background: linear-gradient(135deg, var(--color-button-hover-gradient-start), var(--color-button-hover-gradient-end));
-  -webkit-text-fill-color: transparent;
 }
 
 .footer .studio {
   font-size: 1.25rem;
   color: var(--color-text-secondary);
+  margin: 0;
 }
 
-.footer .footer-contactus {
+.footer-right {
+  position: absolute;
+  right: 30px;
+  top: 50%;
+  transform: translateY(-50%);
   display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  gap: 18px;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+  z-index: 2;
 }
 
-.footer .footer-contactus a {
+.footer-contactus {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+}
+
+.contact-line {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.whatsapp-icon {
   color: var(--color-button-hover-gradient-end);
   font-size: 2.3rem;
   transition: all 0.4s ease;
   text-shadow: 0 0 15px var(--color-button-before-gradient-end);
+  display: flex;
+  align-items: center;
 }
 
-.footer .footer-contactus a:hover {
+.whatsapp-icon:hover {
   color: var(--color-button-hover-gradient-start);
   transform: scale(1.25) rotate(-4deg);
   text-shadow: 0 0 25px var(--color-logo-shadow-start);
 }
 
-.footer .copyright {
-  font-size: 0.95rem;
-  color: var(--color-text-footer);
-  text-align: right;
-  margin-top: 0;
-  z-index: 1;
+.phone-numbers {
+  display: flex;
+  gap: 12px;
+  font-size: 1.3rem;
+  font-weight: 600;
+  direction: ltr;
+  align-items: center;
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(40px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.phone-link {
+  color: var(--color-button-hover-gradient-end);
+  text-decoration: none;
+  transition: color 0.3s ease;
 }
 
+.phone-link:hover {
+  color: var(--color-button-hover-gradient-start);
+  text-decoration: underline;
+}
+
+.footer-contactus span {
+  color: var(--color-button-hover-gradient-end);
+  font-weight: 600;
+}
+
+.mail-link {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--color-button-hover-gradient-end);
+  font-size: 1.25rem;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.mail-link:hover {
+  color: var(--color-button-hover-gradient-start);
+  text-decoration: underline;
+}
+
+.mail-icon {
+  font-size: 1.8rem;
+}
+
+.mail-text {
+  user-select: none;
+}
+
+/* רספונסיביות */
 @media (max-width: 768px) {
-  .footer-content {
-    flex-direction: column;
-    align-items: center;
+  .footer-left,
+  .footer-right {
+    position: static;
+    transform: none;
+    margin: 10px 0;
     text-align: center;
-    gap: 25px;
+    align-items: center;
   }
 
-  .footer h1 {
-    font-size: 1.15rem;
+  .footer-center {
+    max-width: 100%;
+    font-size: 1.4rem;
   }
 
-  .footer .footer-contactus {
+  .footer-contactus {
     justify-content: center;
+    align-items: center;
   }
 
-  .footer .footer-contactus a {
+  .contact-line {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .phone-numbers {
+    justify-content: center;
+    font-size: 1.1rem;
+  }
+
+  .whatsapp-icon {
     font-size: 2.1rem;
   }
 
-  .footer .copyright {
-    font-size: 0.85rem;
-    text-align: center;
-    margin-top: 20px;
+  .mail-link {
+    justify-content: center;
+    font-size: 1.2rem;
+  }
+
+  .footer-left {
+    font-size: 0.9rem;
   }
 }
