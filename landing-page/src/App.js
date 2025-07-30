@@ -1,23 +1,31 @@
-import { HashRouter as Router, Routes, Route } from "react-router-dom";
-import Homepage from './features/homepage/homepage';
-import DashLayout from "./components/layout/dash/DashLayout";
-import UseraQuestion from "./features/questions/UserQuestions";
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
+import Layout from './components/layout/Layout';
+import Homepage from './components/pages/Homepage';
+import About from './components/pages/About';
+import Blog from './components/pages/Blog';
+import FAQ from './components/pages/FAQ';
+import Contact from './components/pages/Contact';
+import './styles/global.css';
+
 function App() {
   return (
-
     <Router>
-      <Routes>
-        {/* <Route element={<CheckLoginNotRequired />} > */}
-        <Route path='/' element={<DashLayout />}>
-          <Route index element={<Homepage />} />
-          <Route path="question_answer" element={<UseraQuestion />} />
-          דף נחיתה שלנו
-          אלופות העולם
-        </Route>
-      </Routes>
+      <div className="App min-h-screen">
+        <Layout>
+          <AnimatePresence mode="wait">
+            <Routes>
+              <Route path="/" element={<Homepage />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/blog" element={<Blog />} />
+              <Route path="/faq" element={<FAQ />} />
+              <Route path="/contact" element={<Contact />} />
+            </Routes>
+          </AnimatePresence>
+        </Layout>
+      </div>
     </Router>
-
-
   );
 }
 

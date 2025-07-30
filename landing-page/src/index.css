@@ -1,147 +1,28 @@
 @import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
 
 :root {
-	/* צבעים בסיסיים שהבאת */
-	--main: #1d1e3d;
-	--mainDark: #191923;
-	--mainLight: #5b5d6e;
-	--text: #FFFFFF;
-	/* צבעים מהעיצוב המקורי (סגול כהה, כחול אלקטרי, טורקיז וכו') */
-	--color-background-gradient-start: #1a1333;
-	--color-background-gradient-end: #2c235a;
-
-	--color-logo-shadow-start: rgba(138, 111, 255, 0.8);
-	--color-button-gradient-end: linear-gradient(135deg, #7e3ff2, #18c3e2);
-	;
-	--color-button-shadow: rgba(0, 0, 0, 0.4);
-
-	/* במקום טורקיז */
-	--color-button-hover-gradient-end: linear-gradient(135deg, #a74eff, #00e6ff);
-	--color-button-before-gradient-end: linear-gradient(135deg, #ba4aff, #00f2ff);
-	--color-button-hover-shadow: rgba(128, 101, 247, 0.8);
-
-
-
-	--color-text-primary: #e5e5ff;
-	--color-text-secondary: #c7b7ff;
-	--color-text-footer: #9a96bc;
-	--color-title: #e5e5ff;
-	--color-subtitle: #c7b7ff;
-	--color-tagline: #d6d4ff;
-	--color-dark-purple: #4b427d;
-
-
-	--color-secondary-button-hover-bg: #18c3e2;
-	--color-secondary-button-hover-text: #1a1333;
-
-	--color-feature-bg: rgba(255, 255, 255, 0.05);
-	--color-feature-border: rgba(255, 255, 255, 0.1);
-	--color-feature-box-shadow: rgba(0, 0, 0, 0.3);
-	--color-feature-title: #bbaeff;
-	--color-feature-text: #dfddff;
-
-	--color-cta-bg-start: linear-gradient(135deg, #231e38, #2e255e);
-	--color-cta-box-shadow-inset: rgba(255, 255, 255, 0.02);
-	--color-section-title: #e5e5ff;
-	--color-cta-title: #f0f0ff;
-	--color-cta-text: #cfc8ff;
-	--color-footer-text: #9a96bc;
-	--color-footer-border: rgba(255, 255, 255, 0.1);
-
+  /* הצבעים מהקוד שלך */
+  --main: #1d1e3d;
+  --mainDark: #191923;
+  --mainLight: #5b5d6e;
+  --text: #FFFFFF;
+  
+  /* הצבעים החדשים מ-BASE44 */
+  --primary-blue: #3b82f6;
+  --primary-purple: #8b5cf6;
+  /* ... שאר הצבעים */
 }
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&display=swap');
 
-/* הגדרות כלליות */
 * {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
-}
-
-body,
-html {
-	overflow-x: hidden;
-}
-
-html {
-	font-family: "Varela Round", serif;
-	font-weight: 400;
-	font-style: normal;
-	direction: rtl;
-	text-align: right;
-}
-
-button {
-	font-family: "Varela Round", serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Rubik', sans-serif;
 }
 
 body {
-	background: radial-gradient(circle, var(--mainDark) 0%, var(--main) 40%, var(--mainLight) 100%);
-	color: var(--text);
-	margin-top: 3vw;
-	font-family: "Varela Round", serif;
-	overflow-x: hidden;
-}
-
-a {
-	color: inherit;
-	text-decoration: none;
-}
-
-/* שאר העיצוב שלך נשאר כפי שהוא, עם שימוש במשתנים הצבעים */
-
-.popup {
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100vw;
-	height: 100vh;
-	z-index: 1001;
-	background: rgba(67, 67, 67, 0.4);
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	overflow: hidden;
-}
-
-.popup-wrapper {
-	position: relative;
-	max-width: 90%;
-	max-height: 90%;
-	width: 500px;
-	background: white;
-	border-radius: 10px;
-	padding: 20px;
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
-}
-
-.popup-wrapper .close-popup {
-	position: absolute;
-	top: 10px;
-	right: 10px;
-	cursor: pointer;
-	z-index: 1002;
-}
-
-.children-popup {
-	padding: 20px;
-}
-
-@media (max-width: 480px) {
-	body {
-		font-size: 14px;
-		line-height: 1.5;
-		box-sizing: border-box;
-		margin-top: 0;
-	}
-
-	img {
-		max-width: 100%;
-		height: auto;
-	}
-}
-
-@media screen and (max-width: 375px) {
-	body {
-		-webkit-font-smoothing: antialiased;
-	}
+  direction: rtl;
+  background: linear-gradient(135deg, var(--main) 0%, var(--mainLight) 100%);
+  color: var(--text);
 }
