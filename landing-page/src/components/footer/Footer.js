@@ -1,9 +1,9 @@
 import React from 'react';
+import './footer.css';
 import { HiMail } from 'react-icons/hi';
 import { BiLogoWhatsapp } from 'react-icons/bi';
-import './footer.css';
-
 const Footer = () => {
+
   const subject = encodeURIComponent("מעוניין/ת בהצעת מחיר לבניית אתר");
   const body = encodeURIComponent(`שלום שרה וריקי,
 
@@ -14,69 +14,85 @@ const Footer = () => {
 תודה רבה מראש!`);
 
   const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=riky.shafer@gmail.com&su=${subject}&body=${body}`;
-
-  const phoneNumber1 = '0548524409';
-  const phoneNumber2 = '0556799675';
   const message = 'שלום, אני מעוניין/ת לשאול לגבי שירות בניית אתרים.';
-  const whatsappUrl1 = `https://wa.me/${phoneNumber1}?text=${encodeURIComponent(message)}`;
-  const whatsappUrl2 = `https://wa.me/${phoneNumber2}?text=${encodeURIComponent(message)}`;
-
+  const whatsappUrl1 = `https://wa.me/972548524409?text=${encodeURIComponent(message)}`;
+  const whatsappUrl2 = `https://wa.me/972556799675?text=${encodeURIComponent(message)}`;
   return (
-    <footer id="contact-section" className='footer'>
-      <div className="footer-left copyright">
-        © 2025 S&R Studio כל הזכויות שמורות
-      </div>
+    <footer className="footer">
+      <div className="footer-container">
+        {/* עמודה 1: תיאור החברה */}
+        <div className="footer-column">
+          <h2 className="footer-logo">S&R Studio</h2>
+          <p>עיצוב ובניית אתרים - מיתוג דיגיטלי מתקדם</p>
+        </div>
 
-      <div className="footer-center">
-        <h1 className="footer-address">מיתוג | עיצוב | בניית אתרים</h1>
-        <h2 className="studio">סטודיו S&R - אתרים בעיצוב אישי</h2>
-      </div>
+        {/* עמודה 2: קישורים מהירים */}
+        <div className="footer-column">
+          <h3>קישורים מהירים</h3>
+          <ul>
+            <li><a href="/">בית</a></li>
+            <li><a href="#about">אודות</a></li>
+            <li><a href="#blog">בלוג</a></li>
+            <li><a href="#faq">שאלות נפוצות</a></li>
+            <li><a href="#contact">צור קשר</a></li>
+          </ul>
+        </div>
 
-      <div className="footer-right">
-        <div className="footer-contactus">
-          <div className="contact-line">
-            <a
-              href={whatsappUrl1}
-              target="_blank"
-              rel="noopener noreferrer"
-              title={`וואטסאפ ${phoneNumber1}`}
-              className="whatsapp-icon"
-            >
-              <BiLogoWhatsapp />
-            </a>
-
-            <div className="phone-numbers">
-              <a
-                href={whatsappUrl1}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="phone-link"
-              >
-                {phoneNumber1}
-              </a>
-              <span>|</span>
-              <a
-                href={whatsappUrl2}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="phone-link"
-              >
-                {phoneNumber2}
-              </a>
-            </div>
-          </div>
+        {/* עמודה 3: פרטי יצירת קשר */}
+        <div className="footer-column">
+          <h3>פרטי יצירת קשר</h3>
 
           <a
             href={gmailUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="mail-link"
+            className="footer-contact-link"
             title="שלח לנו מייל"
           >
-            <HiMail className="mail-icon" />
-            <span className="mail-text">שלח לנו מייל</span>
+            <HiMail className="footer-icon" />
+            riky.shafer@gmail.com
           </a>
+
+          <div className="footer-whatsapp-numbers">
+            <a
+              href={whatsappUrl1}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="footer-contact-link"
+              title="שלח הודעת וואטסאפ"
+            >
+              <BiLogoWhatsapp className="footer-icon" />
+              054-852-4409
+            </a>
+            <span>|</span>
+            <a
+              href={whatsappUrl2}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="footer-contact-link"
+              title="שלח הודעת וואטסאפ"
+            >
+              <BiLogoWhatsapp className="footer-icon" />
+              055-679-9675
+            </a>
+          </div>
+
+          <p style={{ marginTop: '10px' }}>שעות פעילות: ראשון-חמישי, 9:00–18:00</p>
         </div>
+
+        {/* עמודה 4: הרשמה לעדכונים */}
+        <div className="footer-column">
+          <h3>עדכונים</h3>
+          <p>הרשמו לעדכונים שבועיים על חדשות עיצוב ושיווק</p>
+          <form>
+            <input type="email" placeholder="כתובת המייל שלך" />
+            <button type="submit">הרשמה</button>
+          </form>
+        </div>
+      </div>
+
+      <div className="footer-bottom">
+        <p>© 2025 S&R Studio. כל הזכויות שמורות.</p>
       </div>
     </footer>
   );
