@@ -1,3 +1,17 @@
 *.pptx
 /pptx
 /pptx
+# VSCode settings
+.vscode/
+# Node.js dependencies
+node_modules/
+# IDEs and editors
+.idea/
+# macOS
+.DS_Store   
+# Windows
+Thumbs.db
+# logs
+*.log
+# misc
+*.tmp
