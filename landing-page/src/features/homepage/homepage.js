@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import './homepage.css';
-import { motion } from "framer-motion";
+// נכון:
+import { motion } from 'framer-motion';
+
 import ContactAdd from '../contact/registeration/ContactAdd';
 import {
     // ArrowLeft,
