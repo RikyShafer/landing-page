@@ -3,7 +3,7 @@ import {
   useGetAllQuestionsAnswersQuery,
   useAddQuestionMutation,
   useUpdateQuestionAnswerMutation,
-  useDeleteQuestionAnswerMutation,
+  // useDeleteQuestionAnswerMutation,
 } from "./questionApiSlice";
 import "./user-question.css";
 // import useAuth from "../../hooks/useAuth";
@@ -14,7 +14,7 @@ const UserQuestions = () => {
 
   const [addQuestion] = useAddQuestionMutation();
   const [updateQuestion] = useUpdateQuestionAnswerMutation();
-  const [deleteQuestion] = useDeleteQuestionAnswerMutation();
+  // const [deleteQuestion] = useDeleteQuestionAnswerMutation();
 
 //   const { isAdmin } = useAuth();
    // השתמש בלוגיקה של ההרשאות
@@ -69,13 +69,13 @@ const UserQuestions = () => {
     }
   };
 
-  const handleDeleteQuestion = async (id) => {
-    try {
-      await deleteQuestion({ id });
-    } catch (error) {
-      console.error("Error deleting question:", error);
-    }
-  };
+  // const handleDeleteQuestion = async (id) => {
+  //   try {
+  //     await deleteQuestion({ id });
+  //   } catch (error) {
+  //     console.error("Error deleting question:", error);
+  //   }
+  // };
 
   console.log(questions); // לבדוק את הנתונים בקונסול
 
