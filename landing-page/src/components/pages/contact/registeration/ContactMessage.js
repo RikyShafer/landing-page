@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import "./contact-message.css";
+import "../../../styles/contact-message.css";
 
 import { useNavigate } from 'react-router-dom';
 import { FiCheckCircle } from "react-icons/fi";

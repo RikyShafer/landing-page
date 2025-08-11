@@ -1,4 +1,4 @@
-import "./view-blogs.css"
+import "../../../styles/view-blogs.css"
 import Search from "../../../components/search/Search"
 import { useGetAllBlogsQuery, useDeleteBlogMutation, useAddBlogMutation } from "../blogsApiSlice"
 import { Link, useLocation, useNavigate } from "react-router-dom"

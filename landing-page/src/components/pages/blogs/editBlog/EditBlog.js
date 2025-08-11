@@ -1,4 +1,4 @@
-import "./edit-blog.css"
+import "../../../styles/editBlog.css";
 import { useSelector } from 'react-redux';
 import { useUpdateBlogMutation } from "../blogsApiSlice";
 import { useNavigate } from 'react-router-dom';

@@ -5,7 +5,7 @@ import {
   useUpdateQuestionAnswerMutation,
   // useDeleteQuestionAnswerMutation,
 } from "./questionApiSlice";
-import "./user-question.css";
+import "../../../styles/user-question.css";
 // import useAuth from "../../hooks/useAuth";
 
 const UserQuestions = () => {

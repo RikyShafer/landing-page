@@ -1,10 +1,10 @@
 
 
 import { Outlet } from 'react-router-dom'
-import Footer from '../../footer/Footer'
+import Footer from '../footer/Footer'
 
-import "./dash-dashLayout.css"
-import Navbar from '../../Navbar/Navbar'
+import "../../../styles/dash-dashLayout.css";
+import Navbar from '../Navbar/Navbar'
 
 const DashLayout = () => {
 

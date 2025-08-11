@@ -1,4 +1,4 @@
-import apiSlice from "../../app/apiSlice";
+import apiSlice from "../../../app/apiSlice";
 
 
 const questionAnswerApiSlice = apiSlice.injectEndpoints({

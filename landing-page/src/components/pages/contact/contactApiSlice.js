@@ -1,5 +1,5 @@
 
-import apiSlice from '../../app/apiSlice';
+import apiSlice from '../../../app/apiSlice';
 const contactApiSlice = apiSlice.injectEndpoints({
   endpoints: (build) => ({
     contact: build.mutation({

@@ -1,4 +1,4 @@
-import "./view-single-blog.css"
+import "../../../styles/view-single-blog.css"
 import { useGetAllBlogsQuery } from "../blogsApiSlice"
 import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom"

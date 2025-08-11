@@ -1,6 +1,6 @@
 import { useLocation, NavLink } from "react-router-dom";
 import { useState } from "react";
-import './navbar.css';
+import '../../../styles/navbar.css';
 // import useAuth from "../../hooks/useAuth";
 // import { useSendLogoutMutation } from "../../features/auth/authApiSlice";
 //import { MdLogout, MdDensityMedium, MdEmojiPeople, MdFace, MdOutlinePermIdentity, MdOutlineSearch } from "react-icons/md";

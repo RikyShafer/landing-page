@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import './homepage.css';
+import '../../../styles/homepage.css';
 // נכון:
 import { motion } from 'framer-motion';
 

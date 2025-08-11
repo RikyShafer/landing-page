@@ -1,4 +1,4 @@
-import "../editBlog/edit-blog.css"
+import "../../../styles/editBlog.css";
 import { useAddBlogMutation } from "../blogsApiSlice"
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"

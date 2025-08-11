@@ -1,6 +1,6 @@
 
 import React, { useEffect } from 'react';
-import "./contact-add.css";
+import "../../../../styles/contact-add.css";
 import { useContactMutation } from '../contactApiSlice';
 import { useNavigate } from 'react-router-dom';
 import { WiDirectionLeft } from "react-icons/wi";
