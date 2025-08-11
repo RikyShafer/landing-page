@@ -39,10 +39,12 @@
     font-size: 15px;
     z-index: 10;
 }
-.navlink{
+
+.navlink {
     font-weight: 600;
     font-size: 15px;
 }
+
 .navbar-under-homepage a,
 .navbar-under-homepage button {
     background: none;
@@ -77,6 +79,7 @@
 }
 
 /* כפתור יציאה */
+/* או fixed אם רוצים שיישאר גם בגלילה */
 .logout-button {
     padding: 8px 12px;
     margin-right: 20px;
@@ -119,16 +122,16 @@
 
 /* לוגו */
 .logo-homepage {
-    position: relative;
+    position: absolute;
     padding: 0;
     margin: 0;
-    top: 20px;
-    right: 90%;
-    max-width: 100%;
-    transform: translate(-50%, -50%);
+    top: -35px;
+    left: 20px;
     width: 80px;
     height: 80px;
     z-index: 1000;
+    transform: none;
+    max-width: 100%;
 }
 
 @media (max-width: 768px) {

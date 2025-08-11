@@ -86,7 +86,9 @@ const Navbar = () => {
 
       </div>
       <div className="navbar-under-homepage">
-        <img className="logo-homepage" src="/logo.png" alt="לוגו האתר" />
+        <a href="/">
+          <img className="logo-homepage" src="/logo.png" alt="לוגו האתר" />
+        </a>
         <NavLink to="/dash/about" className={({ isActive }) => getNavLinkClass(isActive)}>אודות</NavLink>
         <NavLink to="/dash/astro" className={({ isActive }) => getNavLinkClass(isActive)}>הפרויקטים שלנו:)</NavLink>
         <NavLink to="/dash/diagnosis" className={({ isActive }) => getNavLinkClass(isActive)}>פוסטים</NavLink>

@@ -1,163 +1,157 @@
 import { useState } from "react";
-import {
-  useGetAllQuestionsAnswersQuery,
-  useAddQuestionMutation,
-  useUpdateQuestionAnswerMutation,
-  // useDeleteQuestionAnswerMutation,
-} from "./questionApiSlice";
+import { ChevronDown, Search, MessageCircle, HelpCircle, Phone } from "lucide-react";
 import "../../../styles/user-question.css";
-// import useAuth from "../../hooks/useAuth";
 
 const UserQuestions = () => {
-  const { data: response, isLoading, isError } = useGetAllQuestionsAnswersQuery();
-  const questions = response?.data || []; // גישה למפתח data בתוך האובייקט response
-
-  const [addQuestion] = useAddQuestionMutation();
-  const [updateQuestion] = useUpdateQuestionAnswerMutation();
-  // const [deleteQuestion] = useDeleteQuestionAnswerMutation();
-
-//   const { isAdmin } = useAuth();
-   // השתמש בלוגיקה של ההרשאות
-
-  const [isPopupOpen, setIsPopupOpen] = useState(false);
-  const [selectedQuestion, setSelectedQuestion] = useState(null);
-  const [questionData, setQuestionData] = useState({
-    firstName: "",
-    phone: "",
-    question: "",
-    answer: "",
-  });
-
-  const handleAddQuestion = async () => {
-    try {
-      await addQuestion(questionData);
-      setQuestionData({ firstName: "", phone: "", question: "", answer: "" });
-      setIsPopupOpen(false);
-    } catch (error) {
-      console.error("Error adding question:", error);
+  // נתונים מדומים לדוגמה
+  const mockQuestions = [
+    {
+      _id: "1",
+      question: "כמה זמן לוקח לפתח אתר אינטרנט?",
+      answer: "זמן הפיתוח תלוי בסוג האתר ובמורכבות הדרושה. אתר בסיסי יכול להיות מוכן תוך 2-3 שבועות, בעוד שאתר מורכב עם פונקציונליות מתקדמת יכול לקחת 6-12 שבועות. אנחנו מספקים לוח זמנים מפורט לפני תחילת העבודה."
+    },
+    {
+      _id: "2",
+      question: "האם אני יכול לערוך את האתר בעצמי לאחר המסירה?",
+      answer: "בהחלט! אנחנו בונים את כל האתרים עם מערכת ניהול תוכן (CMS) ידידותית למשתמש. בנוסף, אנחנו מעבירים הדרכה מקיפה ומספקים מדריכים כתובים ווידאו כדי שתוכל לנהל את האתר בקלות."
+    },
+    {
+      _id: "3",
+      question: "מה כלול בחבילת התחזוקה השבועית?",
+      answer: "חבילת התחזוקה כוללת גיבויים אוטומטיים, עדכוני אבטחה, מעקב אחר ביצועים, תמיכה טכנית, עדכונים קטנים לתוכן ודוח חודשי על פעילות האתר. אנחנו דואגים שהאתר שלך יעבוד תמיד בצורה מיטבית."
+    },
+    {
+      _id: "4",
+      question: "האם האתרים שלכם מותאמים למכשירים ניידים?",
+      answer: "כן, בהחלט! כל האתרים שאנחנו בונים הם responsive design ומותאמים לכל סוגי המסכים - סמארטפונים, טאבלטים ומחשבים. אנחנו בודקים את האתר על מגוון מכשירים לפני המסירה."
+    },
+    {
+      _id: "5",
+      question: "איך אתם עוזרים בקידום האתר בגוגל (SEO)?",
+      answer: "אנחנו מטמיעים בסיס SEO חזק בכל אתר: אופטימיזציה טכנית, מהירות טעינה, תגי meta, מבנה URL נכון, ועוד. בנוסף, אנחנו מציעים שירותי קידום מתקדמים הכוללים מחקר מילות מפתח, יצירת תוכן איכותי ובניית קישורים."
+    },
+    {
+      _id: "6",
+      question: "מה קורה אם יש בעיה טכנית באתר?",
+      answer: "אנחנו מספקים תמיכה טכנית 24/7 ללקוחות התחזוקה שלנו. בעיות דחופות נפתרות תוך שעות ספורות. ללקוחות אחרים אנחנו מציעים תמיכה במהלך שעות העבודה הרגילות עם זמן תגובה מהיר."
+    },
+    {
+      _id: "7",
+      question: "האם אתם מספקים שירותי עיצוב גרפי נוספים?",
+      answer: "כן! בנוסף לעיצוב אתרים, אנחנו מציעים עיצוב לוגו, חומרי שיווק דיגיטליים, עיצוב לרשתות חברתיות, כרטיסי ביקור דיגיטליים ועוד. אנחנו יכולים ליצור זהות ויזואלית שלמה לעסק שלך."
+    },
+    {
+      _id: "8",
+      question: "איך אפשר להתחיל לעבוד איתכם?",
+      answer: "פשוט מאוד! פנה אלינו דרך טופס יצירת הקשר, שלח מייל או התקשר. נקבע פגישת ייעוץ ללא התחייבות בה נכיר את הצרכים שלך ונכין הצעת מחיר מותאמת. אחרי אישור ההצעה, נתחיל לעבוד על הפרויקט שלך."
     }
+  ];
+
+  const [searchTerm, setSearchTerm] = useState("");
+  const [expandedItems, setExpandedItems] = useState({});
+
+  const filteredQuestions = mockQuestions.filter((q) =>
+    q.question.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    q.answer.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  const toggleExpanded = (id) => {
+    setExpandedItems(prev => ({
+      ...prev,
+      [id]: !prev[id]
+    }));
   };
-
-  const handleUpdateQuestionAnswer = async () => {
-    if (!selectedQuestion?._id) {
-      console.error("ID is missing!");
-      return;
-    }
-
-    try {
-      // אם יש תשובה, עדכן את השאלה והתשובה
-      if (selectedQuestion.answer) {
-        await updateQuestion({
-          id: selectedQuestion._id,
-          firstName: selectedQuestion.firstName,
-          phone: selectedQuestion.phone,
-          question: selectedQuestion.question,
-          answer: selectedQuestion.answer,
-        });
-      } else {
-        // אם אין תשובה, עדכן רק את השאלה
-        await updateQuestion({
-          id: selectedQuestion._id,
-          firstName: selectedQuestion.firstName,
-          phone: selectedQuestion.phone,
-          question: selectedQuestion.question,
-        });
-      }
-      setSelectedQuestion(null);
-    } catch (error) {
-      console.error("Error updating question or answer:", error);
-    }
-  };
-
-  // const handleDeleteQuestion = async (id) => {
-  //   try {
-  //     await deleteQuestion({ id });
-  //   } catch (error) {
-  //     console.error("Error deleting question:", error);
-  //   }
-  // };
-
-  console.log(questions); // לבדוק את הנתונים בקונסול
 
   return (
-    <div className="questions-container">
-      {isLoading && <p>Loading questions...</p>}
-      {isError && <p>Error loading questions!</p>}
-      {questions.length === 0 && <p>אין שאלות במערכת.</p>}
+    <div className="faq-page" dir="rtl">
+      {/* Header Section */}
+      <div className="faq-header">
+        <div className="container">
+          <div className="header-icon">
+            <HelpCircle size={48} />
+          </div>
 
-      {questions.map((question) => (
-        <div key={question._id} className="question-card">
-          <p>
-            <strong>שאלה:</strong> {question.question}
+          <h1 className="header-title">
+            שאלות <span className="gradient-text">נפוצות</span>
+          </h1>
+
+          <p className="header-subtitle">
+            כל התשובות לשאלות הפופולריות ביותר על השירותים שלנו, תהליך העבודה והתמחיר
           </p>
-          {question.answer && (
-            <p>
-              <strong>תשובה:</strong> {question.answer}
-            </p>
-          )}
-          {/* {isAdmin && (
-            <>
-              <button onClick={() => setSelectedQuestion(question)}>עדכן</button>
-              <button onClick={() => handleDeleteQuestion(question._id)}>מחק</button>
-            </>
-          )} */}
-        </div>
-      ))}
 
-      <button onClick={() => setIsPopupOpen(true)}>הוסף שאלה</button>
-
-      {isPopupOpen && (
-        <div className="popup-overlay">
-          <div className="popup-content">
-            <h2>הוסף שאלה</h2>
-            <input
-              type="text"
-              placeholder="שם פרטי"
-              value={questionData.firstName}
-              onChange={(e) => setQuestionData({ ...questionData, firstName: e.target.value })}
-            />
-            <input
-              type="text"
-              placeholder="מספר טלפון"
-              value={questionData.phone}
-              onChange={(e) => setQuestionData({ ...questionData, phone: e.target.value })}
-            />
-            <textarea
-              placeholder="כתוב את השאלה שלך..."
-              value={questionData.question}
-              onChange={(e) => setQuestionData({ ...questionData, question: e.target.value })}
-            />
-            <button onClick={handleAddQuestion}>שלח</button>
-            <button onClick={() => setIsPopupOpen(false)}>בטל</button>
-          </div>
-        </div>
-      )}
-
-      {selectedQuestion && (
-        <div className="popup-overlay">
-          <div className="popup-content">
-            <h2>עדכן שאלה או תשובה</h2>
-            <textarea
-              placeholder="עדכן שאלה"
-              value={selectedQuestion.question}
-              onChange={(e) =>
-                setSelectedQuestion({ ...selectedQuestion, question: e.target.value })
-              }
-            />
-            {/* {isAdmin && (
-              <textarea
-                placeholder="עדכן תשובה"
-                value={selectedQuestion.answer || ""}
-                onChange={(e) =>
-                  setSelectedQuestion({ ...selectedQuestion, answer: e.target.value })
-                }
+          <div className="search-container">
+            <div className="search-box">
+              <Search className="search-icon" size={20} />
+              <input
+                type="text"
+                placeholder="חפש בשאלות ותשובות..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="search-input"
               />
-            )} */}
-            <button onClick={handleUpdateQuestionAnswer}>עדכן</button>
-            <button onClick={() => setSelectedQuestion(null)}>בטל</button>
+            </div>
           </div>
         </div>
-      )}
+      </div>
+
+      {/* Main Content - Questions Only */}
+      <div className="faq-content">
+        <div className="questions-container">
+          {filteredQuestions.length === 0 ? (
+            <div className="no-results">
+              <MessageCircle size={48} className="no-results-icon" />
+              <p className="no-results-title">לא נמצאו שאלות מתאימות לחיפוש שלך</p>
+              <p className="no-results-subtitle">נסה לחפש במילים אחרות</p>
+            </div>
+          ) : (
+            <div className="questions-list">
+              {filteredQuestions.map((question) => (
+                <div key={question._id} className="question-item">
+                  <button
+                    onClick={() => toggleExpanded(question._id)}
+                    className="question-header"
+                  >
+                    <span className="question-text">
+                      {question.question}
+                    </span>
+                    <ChevronDown
+                      size={20}
+                      className={`chevron-icon ${expandedItems[question._id] ? 'expanded' : ''}`}
+                    />
+                  </button>
+
+                  {expandedItems[question._id] && (
+                    <div className="question-answer">
+                      <p>{question.answer}</p>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* Bottom Contact Section - Full Width */}
+      <div className="bottom-contact-section">
+        <div className="container">
+          <MessageCircle size={40} className="contact-icon" />
+          <h3 className="contact-title">לא מצאת את התשובה?</h3>
+          <p className="contact-subtitle">
+            הצוות שלנו כאן לענות על כל שאלה ולהוסיף תשובות לשאלות נפוצות
+          </p>
+          <div className="contact-buttons">
+            <button className="contact-btn phone-btn">
+              <Phone size={18} />
+              התקשר עכשיו
+            </button>
+            <button className="contact-btn whatsapp-btn">
+              <MessageCircle size={18} />
+              צ'אט בווטסאפ
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
