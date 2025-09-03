@@ -3,6 +3,8 @@ import Homepage from './components/pages/homepage/homepage';
 import DashLayout from "./components/layout/dash/DashLayout";
 import UseraQuestion from "./components/pages/questions/UserQuestions.js";
 import NotFoundPage404 from "./components/NotFoundPage404.js";
+import AboutPage from "./components/pages/about/About.js";
+import ContactPage from "./components/pages/contact/ContactPage.js";
 
 function App() {
   return (
@@ -13,6 +15,9 @@ function App() {
         <Route path='/' element={<DashLayout />}>
           <Route index element={<Homepage />} />
           <Route path="question_answer" element={<UseraQuestion />} />
+           <Route path="dash/about" element={<AboutPage />} />
+           <Route path="contact" element={<ContactPage />} />
+
           דף נחיתה שלנו
           אלופות העולם
         </Route>

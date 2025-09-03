@@ -1,0 +1,129 @@
+.about-container {
+  font-family: "Arial", sans-serif;
+  background: #f8fafc;
+  color: #1f2937;
+}
+
+/* Hero */
+.about-hero {
+  background: #1e1b4b;
+  color: white;
+  text-align: center;
+  padding: 60px 20px;
+}
+.about-hero h1 {
+  font-size: 48px;
+}
+.about-hero .highlight {
+  color: #6366f1;
+}
+.about-hero p {
+  margin-top: 16px;
+  font-size: 18px;
+  color: #e5e7eb;
+}
+
+/* Story */
+.story-section {
+  display: flex;
+  flex-direction: row-reverse; /* טקסט מצד ימין, תמונה משמאל */
+  gap: 60px; /* יותר מרווח */
+  padding: 80px 100px; /* ריווחים גדולים מסביב */
+  align-items: center;
+}
+
+/* טקסט */
+.story-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.story-text h2 {
+  font-size: 36px;        /* כותרת גדולה */
+  font-weight: 700;
+  margin-bottom: 24px;
+  color: #111827;         /* צבע כהה ואלגנטי */
+}
+
+.story-text p {
+  font-size: 18px;        /* טקסט גדול יותר */
+  line-height: 1.8;       /* יותר גובה שורה - "נושם" */
+  color: #374151;         /* אפור כהה רך */
+  margin-bottom: 20px;
+}
+
+/* תמונה */
+.story-image {
+  flex: 1;
+}
+
+.story-image img {
+  width: 100%;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.1); /* צל רך */
+}
+
+/* כפתור / badge */
+.badge {
+  position: static;
+  margin-top: 32px;
+  align-self: flex-start;
+  background: linear-gradient(90deg, #4f46e5, #6366f1);
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 12px 28px;
+  border-radius: 30px;
+  box-shadow: 0 4px 12px rgba(79,70,229,0.3);
+  text-decoration: none;
+  transition: 0.3s ease;
+}
+
+.badge:hover {
+  transform: translateY(-3px);
+}
+
+
+/* Values */
+.values-section {
+  padding: 60px;
+  text-align: center;
+}
+.values-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
+  gap: 20px;
+  margin-top: 30px;
+}
+.value-card {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+/* Team */
+.team-section {
+  padding: 60px;
+  background: #f1f5f9;
+  text-align: center;
+}
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+  gap: 20px;
+  margin-top: 30px;
+}
+.team-card {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+.team-card img {
+  width: 100%;
+  border-radius: 12px;
+  margin-bottom: 10px;
+}

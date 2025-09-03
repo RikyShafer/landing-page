@@ -1,6 +1,6 @@
 import { useLocation, NavLink } from "react-router-dom";
 import { useState } from "react";
-import '../../../styles/navbar.css';
+import './navbar.css';
 // import useAuth from "../../hooks/useAuth";
 // import { useSendLogoutMutation } from "../../features/auth/authApiSlice";
 //import { MdLogout, MdDensityMedium, MdEmojiPeople, MdFace, MdOutlinePermIdentity, MdOutlineSearch } from "react-icons/md";
@@ -34,12 +34,12 @@ const Navbar = () => {
 
   //   }, [isLogoutSuccess])
 
-  // const scrollToSection = (sectionId) => {
-  //   const section = document.getElementById(sectionId);
-  //   if (section) {
-  //     section.scrollIntoView({ behavior: "smooth" });
-  //   }
-  // };
+  const scrollToSection = (sectionId) => {
+    const section = document.getElementById(sectionId);
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth" });
+    }
+  };
 
 
 
@@ -63,7 +63,7 @@ const Navbar = () => {
           <NavLink to="/dash/diagnosis" className={({ isActive }) => getNavLinkClass(isActive)}>אבחונים</NavLink>
           <NavLink to="/dash/reviews" className={({ isActive }) => getNavLinkClass(isActive)}>מה אומרים עלינו?</NavLink>
           <NavLink to="/dash/courses" className={({ isActive }) => getNavLinkClass(isActive)}>קורסים</NavLink>
-           <NavLink to="/contact" className={({ isActive }) => getNavLinkClass(isActive)}>יצירת קשר</NavLink>
+          <NavLink to="/contact" className={({ isActive }) => getNavLinkClass(isActive)}>יצירת קשר</NavLink>
 
           {/* <button className={({ isActive }) => getNavLinkClass(isActive)} onClick={() => scrollToSection("contact-section")}>יצירת קשר</button> */}
         </div>
@@ -88,18 +88,15 @@ const Navbar = () => {
 
       </div>
       <div className="navbar-under-homepage">
-        <a href="/">
-          <img className="logo-homepage" src="/logo.png" alt="לוגו האתר" />
-        </a>
+        <img className="logo-homepage" src="/logo.png" alt="לוגו האתר" />
         <NavLink to="/dash/about" className={({ isActive }) => getNavLinkClass(isActive)}>אודות</NavLink>
-        {/* <NavLink to="/dash/astro" className={({ isActive }) => getNavLinkClass(isActive)}>הפרויקטים שלנו:)</NavLink> */}
+        <NavLink to="/dash/astro" className={({ isActive }) => getNavLinkClass(isActive)}>הפרויקטים שלנו:)</NavLink>
         <NavLink to="/dash/diagnosis" className={({ isActive }) => getNavLinkClass(isActive)}>פוסטים</NavLink>
-        {/* <NavLink to="/dash/reviews" className={({ isActive }) => getNavLinkClass(isActive)}>מה אומרים עלינו?</NavLink> */}
-        
+        <NavLink to="/dash/reviews" className={({ isActive }) => getNavLinkClass(isActive)}>מה אומרים עלינו?</NavLink>
         <NavLink to="/question_answer" className={({ isActive }) => getNavLinkClass(isActive)}>שאלות ותשובות</NavLink>
-       
         <NavLink to="/contact" className={({ isActive }) => getNavLinkClass(isActive)}>יצירת קשר</NavLink>
- {/* <button className="navlink" onClick={() => scrollToSection("contact-section")}>יצירת קשר</button> */}
+
+        {/* <button className="navlink" onClick={() => scrollToSection("contact-section")}>יצירת קשר</button> */}
       </div>
     </div>
 

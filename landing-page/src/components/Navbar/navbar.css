@@ -17,7 +17,7 @@
     z-index: 10;
     display: flex;
     align-items: center;
-    padding: 0 60px;
+    padding: 0 20px;
     color: var(--color-text-primary);
 }
 
@@ -30,7 +30,7 @@
     width: 100%;
     height: 40px;
     justify-content: flex-start;
-    gap: 60px;
+    gap: 20px;
     background-color: var(--text);
     color: var(--color-dark-purple);
     border-bottom: 1px solid var(--color-button-gradient-start);
@@ -39,12 +39,10 @@
     font-size: 15px;
     z-index: 10;
 }
-
-.navlink {
+.navlink{
     font-weight: 600;
     font-size: 15px;
 }
-
 .navbar-under-homepage a,
 .navbar-under-homepage button {
     background: none;
@@ -79,7 +77,6 @@
 }
 
 /* כפתור יציאה */
-/* או fixed אם רוצים שיישאר גם בגלילה */
 .logout-button {
     padding: 8px 12px;
     margin-right: 20px;
@@ -122,16 +119,16 @@
 
 /* לוגו */
 .logo-homepage {
-    position: absolute;
+    position: relative;
     padding: 0;
     margin: 0;
-    top: -35px;
-    left: 20px;
+    top: 20px;
+    right: 90%;
+    max-width: 100%;
+    transform: translate(-50%, -50%);
     width: 80px;
     height: 80px;
     z-index: 1000;
-    transform: none;
-    max-width: 100%;
 }
 
 @media (max-width: 768px) {

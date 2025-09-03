@@ -1,0 +1,200 @@
+.modal-overlay {
+    overflow: hidden;
+    margin-top: 0;
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    /* לוודא שהוא מופיע מעל כל שאר האלמנטים */
+    animation: fadeIn 1s ease-in-out;
+    /* אנימציית דעיכה */
+}
+
+/* תוכן חלון מודאלי */
+.contemt-user-register {
+    position: relative;
+    /* מאפשר מיקום יחסי לאלמנטים פנימיים */
+    background-color: rgb(248, 242, 242);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    width: 80%;
+    max-width: 600px;
+    animation: slideInWithRotation 1s ease-in-out;
+    /* אנימציית שקופית עם סיבוב */
+}
+
+/* סגירת חלון מודאלי */
+.close-button {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: none;
+    border: none;
+    color: #000000;
+    font-size: 38px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.close-button:hover {
+    transform: scale(1.1);
+}
+
+/* אנימציות */
+@keyframes fadeIn {
+    from {
+        background: rgba(255, 255, 255, 0);
+    }
+
+    to {
+        background: rgba(252, 252, 252, 0.5);
+    }
+}
+
+@keyframes slideInWithRotation {
+    from {
+        transform: translateX(-100%) rotate(-20deg);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0) rotate(0deg);
+        opacity: 1;
+    }
+}
+
+/* סגנון הטופס */
+.contemt-user-register-form {
+    background-color: rgb(255, 255, 255);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+.contemt-user-register-h2 {
+    margin-bottom: 9vh;
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 38px;
+    text-align: right;
+    color: #000000;
+}
+
+.contemt-user-register-h3 {
+    font-weight: 600;
+    font-size: 19px;
+    line-height: 29px;
+    text-align: right;
+    color: #000000;
+    margin-bottom: 2vh;
+}
+
+.contemt-user-register-form input {
+    display: grid;
+    grid-template-rows: repeat(1, 1fr);
+    width: calc(100% - 20px);
+    border: none;
+    background-color: transparent;
+    border-bottom: 2px solid rgba(31, 30, 30, 0.7);
+    color: rgba(0, 0, 0, 0.7);
+    margin: 4px;
+    outline: none;
+    transition: border-bottom-color 0.3s;
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
+.contemt-user-register-form input:focus {
+    border-bottom-color: rgba(31, 30, 30, 0.7);
+}
+
+.contemt-user-register-form button {
+    width: 14vw;
+    padding: 13px;
+    background-color: var(--button);
+    color: rgb(0, 0, 0);
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+    margin-top: 8vh;
+    margin-right: 12vw;
+}
+
+.contemt-user-register-form-img {
+    height: 62vh;
+    padding-top: 2vh;
+    margin-top: 5vh;
+    border-radius: 10px;
+}
+
+.contemt-user-register-form-firstName,
+.contemt-user-register-form-email,
+.contemt-user-register-form-phone,
+.contemt-user-register-form-anotherQuestion {
+    flex: 1;
+    margin: 0 10px;
+}
+
+.contemt-user-register-form-firstName,
+.contemt-user-register-form-phone {
+    margin-right: 0;
+}
+
+.contemt-user-register-form-anotherQuestion {
+    margin-left: 0;
+}
+
+.contemt-div-register {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* התאמות למסכים קטנים */
+@media (max-width: 768px) {
+    .contemt-div-register {
+        flex-direction: column;
+    }
+
+    .contemt-user-register-h2 {
+        font-size: 28px;
+        line-height: 32px;
+        margin-bottom: 4vh;
+    }
+
+    .contemt-user-register-h3 {
+        font-size: 16px;
+        line-height: 24px;
+        margin-bottom: 1vh;
+    }
+
+    .contemt-user-register-form input {
+        width: 100%;
+    }
+
+    .contemt-user-register-form button {
+        width: 100%;
+        margin: 2vh 0 0 0;
+    }
+
+    .contemt-user-register-form-firstName,
+    .contemt-user-register-form-email,
+    .contemt-user-register-form-phone,
+    .contemt-user-register-form-anotherQuestion {
+        margin: 0;
+    }
+}
